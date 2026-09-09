@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daizhi Liao — RL &amp; Embodied AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #24292f;
+            background: #ffffff;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+        header { margin-bottom: 40px; border-bottom: 1px solid #d0d7de; padding-bottom: 24px; }
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { font-size: 1.05rem; color: #57606a; margin-bottom: 4px; }
+        .interests { font-size: 1rem; color: #0969da; font-weight: 500; }
+        h2 { font-size: 1.35rem; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #d0d7de; }
+        p { margin-bottom: 12px; }
+        ul { margin-left: 20px; margin-bottom: 12px; }
+        li { margin-bottom: 6px; }
+        a { color: #0969da; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .project { margin-bottom: 20px; padding: 16px; background: #f6f8fa; border-radius: 6px; }
+        .project h3 { font-size: 1.1rem; margin-bottom: 6px; }
+        .project .meta { font-size: 0.9rem; color: #57606a; margin-bottom: 8px; }
+        .badge { display: inline-block; padding: 2px 8px; background: #ddf4ff; color: #0969da; border-radius: 12px; font-size: 0.8rem; margin-right: 6px; }
+        .contribution { margin-bottom: 10px; }
+        .contribution .pr-id { font-weight: 600; color: #0969da; }
+        footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #d0d7de; font-size: 0.85rem; color: #57606a; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Daizhi Liao (廖代志)</h1>
+        <p class="subtitle">Undergraduate, Guangzhou University &middot; PhD Applicant (Fall 2027)</p>
+        <p class="interests">Reinforcement Learning &middot; Embodied AI &middot; Efficient Model Deployment</p>
+    </header>
+
+    <section id="about">
+        <h2>About</h2>
+        <p>I am a third-year undergraduate majoring in Network Engineering at Guangzhou University, with a focus on AI systems. My research lies at the intersection of <strong>reinforcement learning</strong>, <strong>embodied AI</strong>, and <strong>efficient model deployment</strong> — closing the gap between RL research and real-world robot and edge hardware.</p>
+        <p>I am particularly interested in how RL policies can be efficiently deployed on resource-constrained devices (NVIDIA Jetson, edge GPUs, CPUs) through model compression, quantization, and cross-platform optimization. I also work on AI safety and adversarial robustness for learning systems.</p>
+    </section>
+
+    <section id="research">
+        <h2>Research Interests</h2>
+        <ul>
+            <li><strong>Reinforcement Learning</strong> — off-policy algorithms (SAC, TD3, DDPG), sample efficiency, stability</li>
+            <li><strong>Embodied AI</strong> — RL for robot control, sim-to-real transfer</li>
+            <li><strong>Efficient Deployment</strong> — model compression, INT8/FP16 quantization, TensorRT optimization, cross-platform benchmarking</li>
+            <li><strong>Edge Computing</strong> — NVIDIA Jetson (Xavier/Orin), GPU/CPU inference optimization</li>
+            <li><strong>AI Safety</strong> — adversarial robustness, multimedia security</li>
+        </ul>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project">
+            <h3>rl-deploy-bench</h3>
+            <p class="meta">
+                <span class="badge">Python</span>
+                <span class="badge">PyTorch</span>
+                <span class="badge">TensorRT</span>
+                <span class="badge">ONNX</span>
+                <span class="badge">Jetson</span>
+                &middot; v1.1.0 released
+            </p>
+            <p>A cross-platform RL model deployment and performance benchmarking toolkit. Export Stable-Baselines3 policies to ONNX/TorchScript, build TensorRT engines with FP16/INT8 quantization, and benchmark latency, throughput, and accuracy across x86 GPU, NVIDIA Jetson, and CPU — all from one config-driven CLI with auto-generated HTML reports.</p>
+            <p><strong>Research value:</strong> Provides a reproducible benchmark for studying the accuracy-latency tradeoff of RL policy quantization across hardware platforms, enabling researchers to make informed deployment decisions.</p>
+            <p><a href="https://github.com/dafahaha/rl-deploy-bench">GitHub Repository</a> &middot; <a href="https://github.com/dafahaha/rl-deploy-bench/releases/tag/v1.1.0">Release v1.1.0</a></p>
+        </div>
+    </section>
+
+    <section id="opensource">
+        <h2>Open Source Contributions</h2>
+        <p>I actively contribute to RL and AI infrastructure projects, focusing on documentation quality and codebase alignment:</p>
+        <ul>
+            <li class="contribution"><span class="pr-id">UoA-CARES/cares_reinforcement_learning #409</span> — Comprehensive algorithm documentation (DQN, PPO, overview) rewritten against the actual codebase API; 44-algorithm index. <em>Under review.</em></li>
+            <li class="contribution"><span class="pr-id">RLinf/RLinf #1528</span> — New robot arm integration guide (bilingual EN/ZH). <em>Open.</em></li>
+            <li class="contribution"><span class="pr-id">redai-studio/Relax #294</span> — Docker-free installation guide (bilingual EN/ZH). <em>Open.</em></li>
+            <li class="contribution"><span class="pr-id">OWASP/secure-agent-playbook #28</span> — Fixed outdated OWASP LLM Top 10 IDs across 5 files. <em>Open.</em></li>
+        </ul>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Skills</h2>
+        <p><strong>RL &amp; Learning:</strong> PyTorch, Stable-Baselines3, Gymnasium, MuJoCo<br>
+        <strong>Deployment:</strong> ONNX, ONNX Runtime, TensorRT, TorchScript, INT8/FP16 quantization<br>
+        <strong>Edge &amp; Robotics:</strong> NVIDIA Jetson (Xavier/Orin), ROS, CUDA, cuDNN<br>
+        <strong>Systems:</strong> Python, C++, Linux, Docker, Git, CI/CD<br>
+        <strong>Security:</strong> AI safety, adversarial robustness, multimedia security</p>
+    </section>
+
+    <section id="cv">
+        <h2>CV</h2>
+        <p><a href="CV.pdf">Download CV (PDF)</a> — available upon request.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p><strong>Email:</strong> <a href="mailto:ldz@e.gzhu.edu.cn">ldz@e.gzhu.edu.cn</a><br>
+        <strong>GitHub:</strong> <a href="https://github.com/dafahaha">github.com/dafahaha</a><br>
+        <strong>Location:</strong> Guangzhou, China</p>
+    </section>
+
+    <footer>
+        <p>Last updated: September 2026 &middot; Built with GitHub Pages</p>
+    </footer>
+</body>
+</html>
