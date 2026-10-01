@@ -155,6 +155,26 @@ footer{
         <a href="https://github.com/dafahaha/rl-deploy-bench/releases/tag/v1.1.0" target="_blank" rel="noopener">Release v1.1.0</a>
       </div>
     </div>
+
+    <div class="project">
+      <h3>embodied-offpolicy-study</h3>
+      <div class="meta">From-scratch SAC ablation &middot; Hopper-v4 &middot; CPU, multi-seed &middot; 2026</div>
+      <p>A Soft Actor-Critic implementation written from scratch in PyTorch (no Stable-Baselines3), run as a
+      pre-registered, multi-seed ablation: does scaling the rewards entering the critic's Bellman backup by
+      0.1 vs 1.0 change sample efficiency on Hopper-v4? Honest result — the reward-scaled arm trends higher
+      (asymptotic deterministic return ~1087 vs ~363), but the 95% CIs overlap heavily at n=3 over 60k CPU
+      steps, so this is a <em>directional signal, not a confirmed effect or SOTA</em>. Raw per-episode CSVs are
+      committed and the learning curve is reproduced by a single script.</p>
+      <div class="row">
+        <span class="chip">PyTorch</span><span class="chip">SAC</span>
+        <span class="chip">Hopper-v4</span><span class="chip">Pre-registration</span>
+      </div>
+      <div class="links">
+        <a href="https://github.com/dafahaha/embodied-offpolicy-study" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/dafahaha/embodied-offpolicy-study/blob/main/RESEARCH_RETRO.md" target="_blank" rel="noopener">Write-up</a>
+        <a href="https://github.com/dafahaha/embodied-offpolicy-study/blob/main/PRE_REGISTRATION.md" target="_blank" rel="noopener">Pre-registration</a>
+      </div>
+    </div>
   </section>
 
   <section id="opensource">
@@ -180,9 +200,11 @@ footer{
         </tr>
       </tbody>
     </table>
-    <p style="font-size:15px;color:var(--sub);">A root-cause writeup of the TextWorld fix is on my
-      <a href="/blog/textworld-bug-fix.html">blog</a>, alongside smaller review-phase bug fixes across
-      vLLM, pandas, brax, and Hugging Face libraries.</p>
+    <p style="font-size:15px;color:var(--sub);">Root-cause writeups live on my
+      <a href="/blog/">blog</a>:
+      <a href="/blog/textworld-bug-fix.html">the TextWorld multi-command regex fix</a>, and
+      <a href="/blog/ci-missing-deps.html">a postmortem on numpy/scipy missing from requirements</a>,
+      alongside smaller review-phase bug fixes across vLLM, pandas, brax, and Hugging Face libraries.</p>
   </section>
 
   <section id="skills">

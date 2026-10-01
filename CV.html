@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Daizhi Liao — CV</title>
+<style>
+  @page { size: A4; margin: 15mm 15mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #1d1d1f; line-height: 1.45; font-size: 10pt; letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: #0071e3; text-decoration: none; }
+  .name { font-size: 24pt; font-weight: 700; letter-spacing: -0.02em; }
+  .tag { font-size: 10.5pt; color: #1d1d1f; margin-top: 3px; }
+  .contact { font-size: 9pt; color: #6e6e73; margin-top: 4px; }
+  .contact a { color: #0071e3; }
+  h2 {
+    font-size: 9pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+    color: #6e6e73; margin: 13px 0 6px; padding-bottom: 3px; border-bottom: 1px solid #e3e3e6;
+  }
+  .item { margin: 7px 0; }
+  .item .head { display: flex; justify-content: space-between; align-items: baseline; }
+  .item .title { font-weight: 700; font-size: 10.3pt; }
+  .item .when { color: #6e6e73; font-size: 9pt; white-space: nowrap; }
+  .item p { margin: 2px 0 0; color: #1d1d1f; }
+  .muted { color: #3a3a3c; }
+  ul { margin: 3px 0 0 18px; }
+  li { margin: 2px 0; }
+  .edu-sub { color: #3a3a3c; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+  <div class="name">Daizhi Liao</div>
+  <div class="tag">Undergraduate researcher &middot; Reinforcement Learning &amp; Embodied AI &middot; PhD applicant Fall 2027</div>
+  <div class="contact">Guangzhou, China &middot;
+    <a href="mailto:ldz@e.gzhu.edu.cn">ldz@e.gzhu.edu.cn</a> &middot;
+    <a href="https://dafahaha.github.io">dafahaha.github.io</a> &middot;
+    <a href="https://github.com/dafahaha">github.com/dafahaha</a></div>
+
+  <h2>Education</h2>
+  <div class="item">
+    <div class="head">
+      <span class="title">Guangzhou University &mdash; B.Eng., Network Engineering</span>
+      <span class="when">Expected 2027</span>
+    </div>
+    <div class="edu-sub">Third-year undergraduate. Focus: reinforcement learning, embodied AI, and the empirical auditing of deployed AI systems.</div>
+  </div>
+
+  <h2>Research &amp; Projects</h2>
+
+  <div class="item">
+    <div class="head">
+      <span class="title">TransitTruth &mdash; Behavioral-Fingerprint Audit of AI API Relays</span>
+      <span class="when">2026</span>
+    </div>
+    <p>Solo design &amp; implementation. Open-source tool that verifies whether an AI API relay actually serves the advertised
+    model, by probing statistical behavior (random-number, token, latency distributions) against baselines with chi-square /
+    KS tests and Bayesian updating. Built a zero-install, fully client-side web demo and a 20-page technical report validating
+    same-family discrimination: gpt-4o vs gpt-4o-mini, TVD up to 0.90, 91.3% in-distribution resubstitution posterior (not held-out).
+    <br><span class="muted">Code &amp; demo: <a href="https://github.com/dafahaha/transit-truth">github.com/dafahaha/transit-truth</a> &middot; live demo</span></p>
+  </div>
+
+  <div class="item">
+    <div class="head">
+      <span class="title">embodied-offpolicy-study &mdash; From-Scratch SAC Ablation on Hopper-v4</span>
+      <span class="when">2026</span>
+    </div>
+    <p>Soft Actor-Critic implemented from scratch in PyTorch (no Stable-Baselines3), run as a pre-registered, multi-seed
+    ablation (CPU only, 60k env steps/run, 3 seeds per arm): does scaling the rewards entering the critic&rsquo;s Bellman backup
+    change sample efficiency? Honest result &mdash; the reward-scaled arm trends higher (asymptotic return ~1087 vs ~363) but the
+    95% CIs overlap heavily at n=3, so this is a directional signal, not a confirmed effect or SOTA. Raw CSVs are committed
+    and the learning curve is reproduced by script.
+    <br><span class="muted">Code: <a href="https://github.com/dafahaha/embodied-offpolicy-study">github.com/dafahaha/embodied-offpolicy-study</a></span></p>
+  </div>
+
+  <div class="item">
+    <div class="head">
+      <span class="title">rl-deploy-bench &mdash; Cross-Platform RL Deployment &amp; Benchmarking</span>
+      <span class="when">v1.1.0</span>
+    </div>
+    <p>Config-driven CLI: export Stable-Baselines3 policies to ONNX/TorchScript, build TensorRT engines with FP16/INT8
+    quantization, and benchmark latency, throughput, and accuracy across x86 GPU, NVIDIA Jetson, and CPU, with auto-
+    generated HTML reports. A reproducible harness for the accuracy&ndash;latency tradeoff of quantized RL policies.</p>
+  </div>
+
+  <h2>Open Source &mdash; Merged Contributions</h2>
+  <ul>
+    <li><strong>microsoft/TextWorld #377</strong> (merged) &mdash; Fixed <code>env.step</code> crash on multi-command input; non-greedy score parsing plus regression test.</li>
+    <li><strong>shmuma/ptan #57</strong> (merged) &mdash; Fixed Gymnasium API compatibility in experience sources.</li>
+    <li><strong>Algorineko/AgenticArXiv-RL #72</strong> (merged) &mdash; Added MIT License, CONTRIBUTING guide, issue templates, and CI.</li>
+    <li>Additional review-phase bug fixes upstream in vLLM, pandas, google/brax, Farama-Foundation/PettingZoo, and Hugging Face datasets &amp; diffusers.</li>
+  </ul>
+
+  <h2>Technical Skills</h2>
+  <p><strong>RL &amp; learning:</strong> PyTorch, Stable-Baselines3, Gymnasium, MuJoCo &nbsp;|&nbsp;
+  <strong>Deployment:</strong> ONNX, ONNX Runtime, TensorRT, TorchScript, INT8/FP16 quantization &nbsp;|&nbsp;
+  <strong>Systems:</strong> Python, C++, Linux, Docker, Git, CI/CD, CUDA</p>
+
+</body>
+</html>
