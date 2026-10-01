@@ -158,13 +158,15 @@ footer{
 
     <div class="project">
       <h3>embodied-offpolicy-study</h3>
-      <div class="meta">From-scratch SAC ablation &middot; Hopper-v4 &middot; CPU, multi-seed &middot; 2026</div>
+      <div class="meta">Pre-registered three-arm controlled study &middot; Hopper-v4 &middot; CPU, 120k steps &middot; 2026</div>
       <p>A Soft Actor-Critic implementation written from scratch in PyTorch (no Stable-Baselines3), run as a
-      pre-registered, multi-seed ablation: does scaling the rewards entering the critic's Bellman backup by
-      0.1 vs 1.0 change sample efficiency on Hopper-v4? Honest result — the reward-scaled arm trends higher
-      (asymptotic deterministic return ~1087 vs ~363), but the 95% CIs overlap heavily at n=3 over 60k CPU
-      steps, so this is a <em>directional signal, not a confirmed effect or SOTA</em>. Raw per-episode CSVs are
-      committed and the learning curve is reproduced by a single script.</p>
+      pre-registered three-arm controlled study on Hopper-v4 (CPU, 120k env steps, 3 seeds/arm): Baseline
+      (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha (0.1, automatic temperature off, &alpha; fixed at
+      0.2). Asymptotic return 1085&plusmn;790 / 1118&plusmn;705 / 1404&plusmn;715; pairwise Welch p&isin;[0.55,0.95],
+      ANOVA F&asymp;0.22, p&asymp;0.90 — <em>no statistically distinguishable effect detected</em> (low power
+      at n=3). The study's value: at 60k the reward-scaled arm looked ~3&times; better, but extending to the
+      pre-registered 120k budget and adding the fixed-temperature control arm overturned that apparent gain as
+      early seed noise — an honest pre-registered null. Raw CSVs are committed and curves reproduced by script.</p>
       <div class="row">
         <span class="chip">PyTorch</span><span class="chip">SAC</span>
         <span class="chip">Hopper-v4</span><span class="chip">Pre-registration</span>
