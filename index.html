@@ -11,6 +11,8 @@
   --code-bg:#f5f5f7; --line:#e3e3e6; --accent:#0071e3;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
+a{color:var(--accent); text-decoration:none;}
+a:hover{text-decoration:underline;}
 html{-webkit-text-size-adjust:100%; scroll-behavior:smooth;}
 body{
   background:var(--bg); color:var(--ink);
@@ -53,7 +55,7 @@ strong{font-weight:650;}
 .project .meta{font-size:14px; color:var(--sub); margin-bottom:12px;}
 .project p{font-size:16px; color:#3a3a3c;}
 .project .links{margin-top:14px; font-size:15px;}
-.project .links a{margin-right:18px;}
+.project .links a{margin-right:18px; color:var(--accent);}
 .row{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 4px;}
 .chip{
   font-size:12.5px; color:var(--sub); background:var(--code-bg);
@@ -122,8 +124,9 @@ footer{
       Instead of trusting the relay's label, it probes the model's statistical behavior — random-number,
       token, and latency distributions — and compares them against a baseline using chi-square / KS tests
       with Bayesian updating. A zero-install, fully client-side web demo lets anyone run the audit in ~30s.
-      The accompanying 20-page technical report validates same-family discrimination (gpt-4o vs gpt-4o-mini,
-      TVD up to 0.90, 91.3% posterior identification), focusing on fine-grained distinctions that
+      The accompanying extended technical report validates same-family discrimination (gpt-4o vs gpt-4o-mini,
+      TVD up to 0.90, 91.3% in-distribution resubstitution posterior — self-consistency on the baseline's
+      own reference, not held-out accuracy), focusing on fine-grained distinctions that
       single-token fingerprinting does not reach.</p>
       <div class="row">
         <span class="chip">Python</span><span class="chip">Statistical Testing</span>
