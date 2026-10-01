@@ -162,9 +162,10 @@ footer{
       <p>A Soft Actor-Critic implementation written from scratch in PyTorch (no Stable-Baselines3), run as a
       pre-registered three-arm controlled study on Hopper-v4 (CPU, 120k env steps, 3 seeds/arm): Baseline
       (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha (0.1, automatic temperature off, &alpha; fixed at
-      0.2). Asymptotic return 1085&plusmn;790 / 1118&plusmn;705 / 1404&plusmn;715; pairwise Welch p&isin;[0.55,0.95],
-      ANOVA F&asymp;0.22, p&asymp;0.90 — <em>no statistically distinguishable effect detected</em> (low power
-      at n=3). The study's value: at 60k the reward-scaled arm looked ~3&times; better, but extending to the
+      0.2). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm): Baseline 1085&plusmn;698,
+      RewardScaled 1118&plusmn;623, FixedAlpha 1404&plusmn;632. Welch p: Baseline&ndash;FixedAlpha 0.59,
+      Baseline&ndash;RewardScaled 0.95, FixedAlpha&ndash;RewardScaled 0.61; ANOVA F=0.22, p=0.81 —
+      <em>no statistically distinguishable effect detected</em> (n=3; t-intervals overlap heavily). The study's value: at 60k the reward-scaled arm looked ~3&times; better, but extending to the
       pre-registered 120k budget and adding the fixed-temperature control arm overturned that apparent gain as
       early seed noise — an honest pre-registered null. Raw CSVs are committed and curves reproduced by script.</p>
       <div class="row">

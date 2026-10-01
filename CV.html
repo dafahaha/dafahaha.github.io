@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <title>Daizhi Liao — CV</title>
 <style>
-  @page { size: A4; margin: 15mm 15mm; }
+  @page { size: A4; margin: 10mm 13mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
       Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-    color: #1d1d1f; line-height: 1.45; font-size: 10pt; letter-spacing: -0.005em;
+    color: #1d1d1f; line-height: 1.38; font-size: 9.4pt; letter-spacing: -0.005em;
     -webkit-font-smoothing: antialiased;
   }
   a { color: #0071e3; text-decoration: none; }
@@ -19,9 +19,9 @@
   .contact a { color: #0071e3; }
   h2 {
     font-size: 9pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
-    color: #6e6e73; margin: 13px 0 6px; padding-bottom: 3px; border-bottom: 1px solid #e3e3e6;
+    color: #6e6e73; margin: 9px 0 4px; padding-bottom: 2px; border-bottom: 1px solid #e3e3e6;
   }
-  .item { margin: 7px 0; }
+  .item { margin: 5px 0; }
   .item .head { display: flex; justify-content: space-between; align-items: baseline; }
   .item .title { font-weight: 700; font-size: 10.3pt; }
   .item .when { color: #6e6e73; font-size: 9pt; white-space: nowrap; }
@@ -71,9 +71,10 @@
     </div>
     <p>Soft Actor-Critic implemented from scratch in PyTorch (no Stable-Baselines3), run as a pre-registered three-arm controlled
     study on Hopper-v4 (CPU, 120k env steps, 3 seeds/arm): Baseline (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha
-    (0.1, automatic temperature off, &alpha; fixed at 0.2). Asymptotic return 1085&plusmn;790 / 1118&plusmn;705 / 1404&plusmn;715;
-    pairwise Welch p&isin;[0.55,0.95], one-way ANOVA F&asymp;0.22, p&asymp;0.90 &mdash; no statistically distinguishable effect
-    detected (low power at n=3). At 60k the reward-scaled arm looked ~3&times; better, but extending to the pre-registered 120k
+    (0.1, automatic temperature off, &alpha; fixed at 0.2). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm):
+    Baseline 1085&plusmn;698, RewardScaled 1118&plusmn;623, FixedAlpha 1404&plusmn;632. Welch p: Baseline&ndash;FixedAlpha 0.59,
+    Baseline&ndash;RewardScaled 0.95, FixedAlpha&ndash;RewardScaled 0.61; one-way ANOVA F=0.22, p=0.81 &mdash; no statistically
+    distinguishable effect detected (n=3; the t-intervals overlap heavily). At 60k the reward-scaled arm looked ~3&times; better, but extending to the pre-registered 120k
     budget and adding the fixed-temperature control overturned that apparent gain as early seed noise: an honest pre-registered
     null. Raw CSVs committed, curves reproduced by script.
     <br><span class="muted">Code: <a href="https://github.com/dafahaha/embodied-offpolicy-study">github.com/dafahaha/embodied-offpolicy-study</a></span></p>
@@ -88,6 +89,12 @@
     quantization, and benchmark latency, throughput, and accuracy across x86 GPU, NVIDIA Jetson, and CPU, with auto-
     generated HTML reports. A reproducible harness for the accuracy&ndash;latency tradeoff of quantized RL policies.</p>
   </div>
+
+  <h2>Publications &amp; Preprints</h2>
+  <ul>
+    <li>Behavioral Fingerprinting of LLM API Relays &mdash; detecting model substitution on AI API relays (double-blind workshop paper). <em>In preparation.</em></li>
+    <li>TransitTruth: Extended Technical Report &mdash; behavioral probing, chi-square/KS &amp; Bayesian self-consistency, threats to validity (2026). <a href="https://github.com/dafahaha/transit-truth/blob/main/docs/tech_report.pdf">PDF</a>.</li>
+  </ul>
 
   <h2>Open Source &mdash; Merged Contributions</h2>
   <ul>
