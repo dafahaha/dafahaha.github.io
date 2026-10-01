@@ -1,115 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daizhi Liao — RL &amp; Embodied AI</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.7;
-            color: #24292f;
-            background: #ffffff;
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 48px 24px;
-        }
-        header { margin-bottom: 40px; border-bottom: 1px solid #d0d7de; padding-bottom: 24px; }
-        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
-        .subtitle { font-size: 1.05rem; color: #57606a; margin-bottom: 4px; }
-        .interests { font-size: 1rem; color: #0969da; font-weight: 500; }
-        h2 { font-size: 1.35rem; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #d0d7de; }
-        p { margin-bottom: 12px; }
-        ul { margin-left: 20px; margin-bottom: 12px; }
-        li { margin-bottom: 6px; }
-        a { color: #0969da; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .project { margin-bottom: 20px; padding: 16px; background: #f6f8fa; border-radius: 6px; }
-        .project h3 { font-size: 1.1rem; margin-bottom: 6px; }
-        .project .meta { font-size: 0.9rem; color: #57606a; margin-bottom: 8px; }
-        .badge { display: inline-block; padding: 2px 8px; background: #ddf4ff; color: #0969da; border-radius: 12px; font-size: 0.8rem; margin-right: 6px; }
-        .contribution { margin-bottom: 10px; }
-        .contribution .pr-id { font-weight: 600; color: #0969da; }
-        footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #d0d7de; font-size: 0.85rem; color: #57606a; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daizhi Liao — RL &amp; Embodied AI</title>
+<meta name="description" content="Daizhi Liao — undergraduate researcher on reinforcement learning, embodied AI, and the empirical auditing of deployed AI systems.">
+<style>
+:root{
+  --ink:#1d1d1f; --sub:#6e6e73; --bg:#fbfbfd; --card:#ffffff;
+  --code-bg:#f5f5f7; --line:#e3e3e6; --accent:#0071e3;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",
+    "Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.7; font-size:17px; letter-spacing:-0.01em;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+.nav{
+  position:sticky; top:0; z-index:10;
+  background:rgba(251,251,253,.8); backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav .inner{
+  max-width:820px; margin:0 auto; padding:14px 24px;
+  display:flex; align-items:baseline; gap:20px; flex-wrap:wrap;
+}
+.nav .brand{font-weight:700; font-size:16px; letter-spacing:-0.01em; color:var(--ink); text-decoration:none;}
+.nav .links{margin-left:auto; display:flex; gap:18px; flex-wrap:wrap;}
+.nav .links a{color:var(--sub); text-decoration:none; font-size:14px;}
+.nav .links a:hover{color:var(--accent);}
+.wrap{max-width:820px; margin:0 auto; padding:56px 24px 96px;}
+header.hero{margin-bottom:48px;}
+h1{font-size:44px; line-height:1.1; font-weight:700; letter-spacing:-0.028em; margin-bottom:10px;}
+.subtitle{font-size:19px; color:var(--sub); margin-bottom:4px; letter-spacing:-0.01em;}
+.tagline{font-size:17px; color:#3a3a3c; margin-top:14px; max-width:640px;}
+h2{
+  font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--sub); margin:56px 0 18px;
+}
+p{margin:12px 0; max-width:680px;}
+ul{margin:8px 0 8px 20px; max-width:680px;}
+li{margin:6px 0;}
+strong{font-weight:650;}
+.project{
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:24px 26px; margin:16px 0;
+}
+.project h3{font-size:21px; font-weight:700; letter-spacing:-0.015em; margin-bottom:6px;}
+.project .meta{font-size:14px; color:var(--sub); margin-bottom:12px;}
+.project p{font-size:16px; color:#3a3a3c;}
+.project .links{margin-top:14px; font-size:15px;}
+.project .links a{margin-right:18px;}
+.row{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 4px;}
+.chip{
+  font-size:12.5px; color:var(--sub); background:var(--code-bg);
+  border-radius:7px; padding:2px 9px;
+}
+table{border-collapse:collapse; width:100%; max-width:760px; margin:10px 0; font-size:15px;}
+th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+th{font-weight:600; color:var(--sub); font-size:13px; letter-spacing:0.02em;}
+.pill{display:inline-block; font-size:12px; color:#1d7d34; background:rgba(52,199,89,.12); border-radius:999px; padding:1px 9px; font-weight:600;}
+code{font-family:"SF Mono",Menlo,Consolas,monospace; font-size:.86em; background:var(--code-bg); padding:1px 5px; border-radius:5px;}
+footer{
+  margin-top:72px; padding-top:24px; border-top:1px solid var(--line);
+  font-size:14px; color:var(--sub); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+@media (max-width:600px){
+  .wrap{padding:40px 18px 72px;}
+  h1{font-size:33px;} .subtitle{font-size:17px;}
+  .nav .links{gap:14px;}
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1>Daizhi Liao</h1>
-        <p class="subtitle">Undergraduate, Guangzhou University &middot; PhD Applicant (Fall 2027)</p>
-        <p class="interests">Reinforcement Learning &middot; Embodied AI &middot; Efficient Model Deployment</p>
-    </header>
 
-    <section id="about">
-        <h2>About</h2>
-        <p>I am a third-year undergraduate majoring in Network Engineering at Guangzhou University, with a focus on AI systems. My research lies at the intersection of <strong>reinforcement learning</strong>, <strong>embodied AI</strong>, and <strong>efficient model deployment</strong> — closing the gap between RL research and real-world robot and edge hardware.</p>
-        <p>I am particularly interested in how RL policies can be efficiently deployed on resource-constrained devices (NVIDIA Jetson, edge GPUs, CPUs) through model compression, quantization, and cross-platform optimization. I also work on AI safety and adversarial robustness for learning systems.</p>
-    </section>
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="#top">Daizhi Liao</a>
+    <div class="links">
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#opensource">Open Source</a>
+      <a href="/blog/">Blog</a>
+      <a href="/transit-truth/">Demo</a>
+      <a href="CV.pdf">CV</a>
+    </div>
+  </div>
+</nav>
 
-    <section id="research">
-        <h2>Research Interests</h2>
-        <ul>
-            <li><strong>Reinforcement Learning</strong> — off-policy algorithms (SAC, TD3, DDPG), sample efficiency, stability</li>
-            <li><strong>Embodied AI</strong> — RL for robot control, sim-to-real transfer</li>
-            <li><strong>Efficient Deployment</strong> — model compression, INT8/FP16 quantization, TensorRT optimization, cross-platform benchmarking</li>
-            <li><strong>Edge Computing</strong> — NVIDIA Jetson (Xavier/Orin), GPU/CPU inference optimization</li>
-            <li><strong>AI Safety</strong> — adversarial robustness, multimedia security</li>
-        </ul>
-    </section>
+<div class="wrap" id="top">
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>rl-deploy-bench</h3>
-            <p class="meta">
-                <span class="badge">Python</span>
-                <span class="badge">PyTorch</span>
-                <span class="badge">TensorRT</span>
-                <span class="badge">ONNX</span>
-                <span class="badge">Jetson</span>
-                &middot; v1.1.0 released
-            </p>
-            <p>A cross-platform RL model deployment and performance benchmarking toolkit. Export Stable-Baselines3 policies to ONNX/TorchScript, build TensorRT engines with FP16/INT8 quantization, and benchmark latency, throughput, and accuracy across x86 GPU, NVIDIA Jetson, and CPU — all from one config-driven CLI with auto-generated HTML reports.</p>
-            <p><strong>Research value:</strong> Provides a reproducible benchmark for studying the accuracy-latency tradeoff of RL policy quantization across hardware platforms, enabling researchers to make informed deployment decisions.</p>
-            <p><a href="https://github.com/dafahaha/rl-deploy-bench">GitHub Repository</a> &middot; <a href="https://github.com/dafahaha/rl-deploy-bench/releases/tag/v1.1.0">Release v1.1.0</a></p>
-        </div>
-    </section>
+  <header class="hero">
+    <h1>Daizhi Liao</h1>
+    <p class="subtitle">Third-year undergraduate, Guangzhou University &middot; Network Engineering</p>
+    <p class="subtitle">Applying to PhD programs in Fall 2027 &middot; Embodied AI / Reinforcement Learning / Robotics</p>
+    <p class="tagline">I work at the intersection of reinforcement learning, embodied agents, and the
+    empirical auditing of deployed AI systems — building tools that test what a model actually does,
+    not just what it claims to do.</p>
+  </header>
 
-    <section id="opensource">
-        <h2>Open Source Contributions</h2>
-        <p>I actively contribute to RL and AI infrastructure projects, focusing on documentation quality and codebase alignment:</p>
-        <ul>
-            <li class="contribution"><span class="pr-id">UoA-CARES/cares_reinforcement_learning #409</span> — Comprehensive algorithm documentation (DQN, PPO, overview) rewritten against the actual codebase API; 44-algorithm index. <em>Under review.</em></li>
-            <li class="contribution"><span class="pr-id">RLinf/RLinf #1528</span> — New robot arm integration guide (bilingual EN/ZH). <em>Closed (unmerged).</em></li>
-            <li class="contribution"><span class="pr-id">redai-studio/Relax #294</span> — Docker-free installation guide (bilingual EN/ZH). <em>Open.</em></li>
-            <li class="contribution"><span class="pr-id">OWASP/secure-agent-playbook #28</span> — Fixed outdated OWASP LLM Top 10 IDs across 5 files. <em>Open.</em></li>
-        </ul>
-    </section>
+  <section id="research">
+    <h2>Research Interests</h2>
+    <ul>
+      <li><strong>Reinforcement learning for embodied agents</strong> — off-policy algorithms, sample efficiency, stability.</li>
+      <li><strong>Behavioral fingerprinting &amp; empirical auditing of LLMs</strong> — statistical tests that distinguish models by how they behave under probing, not by self-reported labels.</li>
+      <li><strong>Cross-platform RL deployment</strong> — policy export (ONNX/TorchScript), TensorRT/INT8/FP16 quantization, latency–accuracy tradeoffs on GPU and edge.</li>
+      <li><strong>AI safety &amp; adversarial robustness</strong> — where deployed systems silently deviate from specification.</li>
+    </ul>
+  </section>
 
-    <section id="skills">
-        <h2>Technical Skills</h2>
-        <p><strong>RL &amp; Learning:</strong> PyTorch, Stable-Baselines3, Gymnasium, MuJoCo<br>
-        <strong>Deployment:</strong> ONNX, ONNX Runtime, TensorRT, TorchScript, INT8/FP16 quantization<br>
-        <strong>Edge &amp; Robotics:</strong> NVIDIA Jetson (Xavier/Orin), ROS, CUDA, cuDNN<br>
-        <strong>Systems:</strong> Python, C++, Linux, Docker, Git, CI/CD<br>
-        <strong>Security:</strong> AI safety, adversarial robustness, multimedia security</p>
-    </section>
+  <section id="projects">
+    <h2>Selected Projects</h2>
 
-    <section id="cv">
-        <h2>CV</h2>
-        <p><a href="CV.pdf">Download CV (PDF)</a> — available upon request.</p>
-    </section>
+    <div class="project">
+      <h3>TransitTruth</h3>
+      <div class="meta">Open-source auditing tool &middot; behavioral fingerprinting of AI API relays &middot; 2026</div>
+      <p>An open-source system that checks whether an AI API relay actually serves the model it advertises.
+      Instead of trusting the relay's label, it probes the model's statistical behavior — random-number,
+      token, and latency distributions — and compares them against a baseline using chi-square / KS tests
+      with Bayesian updating. A zero-install, fully client-side web demo lets anyone run the audit in ~30s.
+      The accompanying 20-page technical report validates same-family discrimination (gpt-4o vs gpt-4o-mini,
+      TVD up to 0.90, 91.3% posterior identification), focusing on fine-grained distinctions that
+      single-token fingerprinting does not reach.</p>
+      <div class="row">
+        <span class="chip">Python</span><span class="chip">Statistical Testing</span>
+        <span class="chip">Bayesian Inference</span><span class="chip">Client-side JS</span>
+      </div>
+      <div class="links">
+        <a href="https://github.com/dafahaha/transit-truth" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://dafahaha.github.io/transit-truth/" target="_blank" rel="noopener">Live Demo</a>
+        <a href="https://github.com/dafahaha/transit-truth/blob/main/docs/tech_report.pdf" target="_blank" rel="noopener">Technical Report (PDF)</a>
+      </div>
+    </div>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p><strong>Email:</strong> <a href="mailto:ldz@e.gzhu.edu.cn">ldz@e.gzhu.edu.cn</a><br>
-        <strong>GitHub:</strong> <a href="https://github.com/dafahaha">github.com/dafahaha</a><br>
-        <strong>Location:</strong> Guangzhou, China</p>
-    </section>
+    <div class="project">
+      <h3>rl-deploy-bench</h3>
+      <div class="meta">Cross-platform RL deployment &amp; benchmarking toolkit &middot; v1.1.0</div>
+      <p>A config-driven CLI that exports Stable-Baselines3 policies to ONNX/TorchScript, builds TensorRT
+      engines with FP16/INT8 quantization, and benchmarks latency, throughput, and accuracy across x86 GPU,
+      NVIDIA Jetson, and CPU, with auto-generated HTML reports — a reproducible harness for the
+      accuracy–latency tradeoff of quantized RL policies.</p>
+      <div class="row">
+        <span class="chip">Python</span><span class="chip">PyTorch</span>
+        <span class="chip">TensorRT</span><span class="chip">ONNX</span><span class="chip">Jetson</span>
+      </div>
+      <div class="links">
+        <a href="https://github.com/dafahaha/rl-deploy-bench" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="https://github.com/dafahaha/rl-deploy-bench/releases/tag/v1.1.0" target="_blank" rel="noopener">Release v1.1.0</a>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>Last updated: September 2026 &middot; Built with GitHub Pages</p>
-    </footer>
+  <section id="opensource">
+    <h2>Open Source — Merged Contributions</h2>
+    <p>I contribute fixes upstream to RL and AI infrastructure. Merged work includes:</p>
+    <table>
+      <thead><tr><th>Project</th><th>PR</th><th>What I fixed</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://github.com/microsoft/TextWorld/pull/377" target="_blank" rel="noopener">microsoft/TextWorld</a></td>
+          <td>#377 <span class="pill">merged</span></td>
+          <td>Fixed <code>env.step</code> crash on multi-command input (non-greedy score parsing + regression test).</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/shmuma/ptan/pull/57" target="_blank" rel="noopener">shmuma/ptan</a></td>
+          <td>#57 <span class="pill">merged</span></td>
+          <td>Fixed Gymnasium API compatibility in experience sources.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/Algorineko/AgenticArXiv-RL/pull/72" target="_blank" rel="noopener">Algorineko/AgenticArXiv-RL</a></td>
+          <td>#72 <span class="pill">merged</span></td>
+          <td>Added MIT License, CONTRIBUTING guide, issue templates, and CI.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:15px;color:var(--sub);">A root-cause writeup of the TextWorld fix is on my
+      <a href="/blog/textworld-bug-fix.html">blog</a>, alongside smaller review-phase bug fixes across
+      vLLM, pandas, brax, and Hugging Face libraries.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li><strong>RL &amp; learning:</strong> PyTorch, Stable-Baselines3, Gymnasium, MuJoCo</li>
+      <li><strong>Deployment:</strong> ONNX, ONNX Runtime, TensorRT, TorchScript, INT8/FP16 quantization</li>
+      <li><strong>Systems:</strong> Python, C++, Linux, Docker, Git, CI/CD, CUDA</li>
+    </ul>
+  </section>
+
+  <footer>
+    <span><a href="mailto:ldz@e.gzhu.edu.cn">ldz@e.gzhu.edu.cn</a> &middot; Guangzhou, China</span>
+    <span><a href="https://github.com/dafahaha" target="_blank" rel="noopener">GitHub</a> &middot; Last updated October 2026</span>
+  </footer>
+
+</div>
 </body>
 </html>
