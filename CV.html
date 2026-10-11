@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Daizhi Liao — CV</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230071e3'/><text x='50' y='68' font-size='52' font-family='-apple-system,sans-serif' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>">
 <style>
   @page { size: A4; margin: 10mm 13mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,7 +62,7 @@
     model, by probing statistical behavior (random-number, token, latency distributions) against baselines with chi-square /
     KS tests and Bayesian updating. Built a zero-install, fully client-side web demo and a 20-page technical report validating
     same-family discrimination: gpt-4o vs gpt-4o-mini, TVD up to 0.90, 91.3% in-distribution resubstitution posterior (not held-out).
-    <br><span class="muted">Code &amp; demo: <a href="https://github.com/dafahaha/transit-truth">github.com/dafahaha/transit-truth</a> &middot; live demo</span></p>
+    <br><span class="muted">Code &amp; demo: <a href="https://github.com/dafahaha/transit-truth">github.com/dafahaha/transit-truth</a> &middot; <a href="https://dafahaha.github.io/transit-truth/">live demo</a></span></p>
   </div>
 
   <div class="item">
@@ -86,8 +87,9 @@
       <span class="when">v1.1.0</span>
     </div>
     <p>Config-driven CLI: export Stable-Baselines3 policies to ONNX/TorchScript, build TensorRT engines with FP16/INT8
-    quantization, and benchmark latency, throughput, and accuracy across x86 GPU, NVIDIA Jetson, and CPU, with auto-
-    generated HTML reports. A reproducible harness for the accuracy&ndash;latency tradeoff of quantized RL policies.</p>
+    quantization, and benchmark latency, throughput, and accuracy across x86 GPU and CPU, with auto-generated HTML
+    reports. Jetson/edge is a target deployment path, not yet measured on device. A reproducible harness for the
+    accuracy&ndash;latency tradeoff of quantized RL policies.</p>
   </div>
 
   <h2>Publications &amp; Preprints</h2>
