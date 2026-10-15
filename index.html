@@ -104,9 +104,9 @@ footer{
     <h1>Daizhi Liao</h1>
     <p class="subtitle">Third-year undergraduate, Guangzhou University &middot; Network Engineering</p>
     <p class="subtitle">Applying to PhD programs in Fall 2027 &middot; Embodied AI / Reinforcement Learning / Robotics</p>
-    <p class="tagline">I work at the intersection of reinforcement learning, embodied agents, and the
-    empirical auditing of deployed AI systems — building tools that test what a model actually does,
-    not just what it claims to do.</p>
+    <p class="tagline">I lead a small set of my own tools and studies — things that test what a
+    deployed model actually does, not what it claims to do — and I contribute a limited number of
+    fixes upstream in depth, rather than scattering patches across many repos.</p>
   </header>
 
   <section id="research">
@@ -145,19 +145,24 @@ footer{
     </div>
 
     <div class="project">
-      <h3>rl-deploy-bench</h3>
-      <div class="meta">Cross-platform RL deployment &amp; benchmarking toolkit &middot; v1.1.0</div>
-      <p>A config-driven CLI that exports Stable-Baselines3 policies to ONNX/TorchScript and builds TensorRT
-      engines with FP16/INT8 quantization; benchmarks latency, throughput, and accuracy on x86 GPU and CPU,
-      with auto-generated HTML reports — a reproducible harness for the accuracy–latency tradeoff of quantized
-      RL policies. Jetson/edge is a target deployment path, not yet measured on device.</p>
+      <h3>wm-audit</h3>
+      <div class="meta">Preregistered world-model audit suite &middot; perceptual fidelity vs control utility &middot; 2026</div>
+      <p>A preregistered, single-machine CPU audit suite that disentangles a world model&rsquo;s
+      <strong>perceptual fidelity</strong> (next-frame MSE / SSIM / NLL, plus fixed-filter stand-ins for
+      LPIPS / rollout FVD — deterministic random-conv filter banks, <em>not</em> learned VGG/AlexNet
+      backbones) from its <strong>control utility</strong> (whether a planner can actually solve the
+      task using it). A reduced pilot on one env (pixel_nav, 3 seeds &times; 3 capacities, 12k steps)
+      found: pixel fidelity weakly predicts closed-loop return (H1 supported, |&rho;|=0.32&lt;0.4);
+      control-relevant diagnostics did not (H2 not supported, &rho;=0.26&lt;0.6); INT8 compression did not
+      degrade calibration faster than raw pixel fidelity (H3 not supported, n_pairs=9). This is a CPU
+      reduced pilot, not the locked 200k-step &times; 5-seed &times; 2-env main run.</p>
       <div class="row">
-        <span class="chip">Python</span><span class="chip">PyTorch</span>
-        <span class="chip">TensorRT</span><span class="chip">ONNX</span><span class="chip">CPU/GPU</span>
+        <span class="chip">PyTorch</span><span class="chip">World Models</span>
+        <span class="chip">Preregistration</span><span class="chip">CPU</span>
       </div>
       <div class="links">
-        <a href="https://github.com/dafahaha/rl-deploy-bench" target="_blank" rel="noopener">GitHub Repository</a>
-        <a href="https://github.com/dafahaha/rl-deploy-bench/releases/tag/v1.1.0" target="_blank" rel="noopener">Release v1.1.0</a>
+        <a href="https://github.com/dafahaha/wm-audit" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/LEADERBOARD.md" target="_blank" rel="noopener">Pilot Results</a>
       </div>
     </div>
 
@@ -183,11 +188,29 @@ footer{
         <a href="https://github.com/dafahaha/embodied-offpolicy-study/blob/main/PRE_REGISTRATION.md" target="_blank" rel="noopener">Pre-registration</a>
       </div>
     </div>
+
+    <div class="project">
+      <h3>rl-deploy-bench</h3>
+      <div class="meta">Cross-platform RL deployment &amp; benchmarking toolkit &middot; v1.1.0</div>
+      <p>A config-driven CLI that exports Stable-Baselines3 policies to ONNX/TorchScript and builds TensorRT
+      engines with FP16/INT8 quantization; benchmarks latency, throughput, and accuracy on x86 GPU and CPU,
+      with auto-generated HTML reports — a reproducible harness for the accuracy–latency tradeoff of quantized
+      RL policies. Jetson/edge is a target deployment path, not yet measured on device.</p>
+      <div class="row">
+        <span class="chip">Python</span><span class="chip">PyTorch</span>
+        <span class="chip">TensorRT</span><span class="chip">ONNX</span><span class="chip">CPU/GPU</span>
+      </div>
+      <div class="links">
+        <a href="https://github.com/dafahaha/rl-deploy-bench" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="https://github.com/dafahaha/rl-deploy-bench/releases/tag/v1.1.0" target="_blank" rel="noopener">Release v1.1.0</a>
+      </div>
+    </div>
   </section>
 
   <section id="opensource">
-    <h2>Open Source — Merged Contributions</h2>
-    <p>I contribute fixes upstream to RL and AI infrastructure. Merged work includes:</p>
+    <h2>Open Source</h2>
+    <p>I contribute a small number of fixes upstream to RL and AI infrastructure, in depth rather than
+    scattershot. Merged code work:</p>
     <table>
       <thead><tr><th>Project</th><th>PR</th><th>What I fixed</th></tr></thead>
       <tbody>
@@ -202,11 +225,6 @@ footer{
           <td>Fixed Gymnasium API compatibility in experience sources.</td>
         </tr>
         <tr>
-          <td><a href="https://github.com/Algorineko/AgenticArXiv-RL/pull/72" target="_blank" rel="noopener">Algorineko/AgenticArXiv-RL</a></td>
-          <td>#72 <span class="pill">merged</span></td>
-          <td>Added MIT License, CONTRIBUTING guide, Code of Conduct, and CI.</td>
-        </tr>
-        <tr>
           <td><a href="https://github.com/learnsyslab/gym-pybullet-drones/pull/319" target="_blank" rel="noopener">learnsyslab/gym-pybullet-drones</a></td>
           <td>#319 <span class="pill">merged</span></td>
           <td>Replaced <code>print()</code> error statements with module logging; converted <code>exit()</code> calls to raised exceptions.</td>
@@ -218,11 +236,73 @@ footer{
         </tr>
       </tbody>
     </table>
-    <p style="font-size:15px;color:var(--sub);">Root-cause writeups live on my
-      <a href="/blog/">blog</a>:
+
+    <p style="margin-top:24px;">Selected code PRs currently <strong>under review (not yet merged)</strong> in upstream RL/ML infrastructure:</p>
+    <table>
+      <thead><tr><th>Project</th><th>PR</th><th>What I fixed</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://github.com/thu-ml/tianshou/pull/1315" target="_blank" rel="noopener">thu-ml/tianshou</a></td>
+          <td>#1315 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed pickled policy restore under PyTorch 2.6 <code>weights_only</code> default.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/ContinualAI/avalanche/pull/1701" target="_blank" rel="noopener">ContinualAI/avalanche</a></td>
+          <td>#1701 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed MASPlugin raising on zero loss (falsy check).</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/uoe-agents/epymarl/pull/92" target="_blank" rel="noopener">uoe-agents/epymarl</a></td>
+          <td>#92 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed registration of multi-digit versioned PettingZoo envs.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/vllm-project/vllm/pull/57400" target="_blank" rel="noopener">vllm-project/vllm</a></td>
+          <td>#57400 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed <code>system_fingerprint=null</code> emitted under fingerprint-mode=none.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/huggingface/datasets/pull/8633" target="_blank" rel="noopener">huggingface/datasets</a></td>
+          <td>#8633 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Accepted <code>pathlib.Path</code> in load/save_to_disk.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/huggingface/diffusers/pull/14796" target="_blank" rel="noopener">huggingface/diffusers</a></td>
+          <td>#14796 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed undefined attribute in TangentialClassifierFreeGuidance.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/google/brax/pull/676" target="_blank" rel="noopener">google/brax</a></td>
+          <td>#676 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed EpisodeWrapper metrics accumulation with action_repeat.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/AI4Finance-Foundation/ElegantRL/pull/488" target="_blank" rel="noopener">AI4Finance-Foundation/ElegantRL</a></td>
+          <td>#488 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed <code>argmax</code>&rarr;<code>max</code> in get_cumulative_rewards.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/Farama-Foundation/PettingZoo/pull/1465" target="_blank" rel="noopener">Farama-Foundation/PettingZoo</a></td>
+          <td>#1465 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed agent selector reinit in tictactoe reset.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/MichalBortkiewicz/JaxGCRL/pull/65" target="_blank" rel="noopener">MichalBortkiewicz/JaxGCRL</a></td>
+          <td>#65 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed XML path resolution in arm manipulation envs.</td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/pandas-dev/pandas/pull/68968" target="_blank" rel="noopener">pandas-dev/pandas</a></td>
+          <td>#68968 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Fixed <code>to_html</code> href escaping with render_links + escape.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:15px;color:var(--sub);margin-top:18px;">Smaller docs / community-health PRs (LICENSE, CONTRIBUTING,
+      Code of Conduct, CI setup) across a number of smaller RL/ML projects, plus a typo fix in FluxVLA.
+      Root-cause writeups live on my <a href="/blog/">blog</a>:
       <a href="/blog/textworld-bug-fix.html">the TextWorld multi-command regex fix</a>, and
-      <a href="/blog/ci-missing-deps.html">a postmortem on numpy/scipy missing from requirements</a>,
-      alongside review-phase bug fixes across upstream RL and AI infrastructure (e.g., vLLM, pandas, brax, PettingZoo, tianshou, avalanche, and Hugging Face libraries).</p>
+      <a href="/blog/ci-missing-deps.html">a postmortem on numpy/scipy missing from requirements</a>.</p>
   </section>
 
   <section id="skills">
