@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TransitTruth — Daizhi Liao</title>
+<meta name="description" content="TransitTruth: a local CLI that probes an OpenAI-compatible endpoint for probabilistic model-identity consistency. Probabilistic evidence, not a cryptographic proof.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230071e3'/><text x='50' y='68' font-size='52' font-family='-apple-system,sans-serif' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>">
+<style>
+:root{
+  --ink:#1d1d1f; --sub:#6e6e73; --bg:#fbfbfd; --card:#ffffff;
+  --code-bg:#f5f5f7; --line:#e3e3e6; --accent:#0071e3;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+a{color:var(--accent); text-decoration:none;}
+a:hover{text-decoration:underline;}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",
+    "Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.7; font-size:17px; letter-spacing:-0.01em;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+.nav{
+  position:sticky; top:0; z-index:10;
+  background:rgba(251,251,253,.8); backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav .inner{
+  max-width:820px; margin:0 auto; padding:14px 24px;
+  display:flex; align-items:baseline; gap:20px; flex-wrap:wrap;
+}
+.nav .brand{font-weight:700; font-size:16px; letter-spacing:-0.01em; color:var(--ink); text-decoration:none;}
+.nav .links{margin-left:auto; display:flex; gap:18px; flex-wrap:wrap;}
+.nav .links a{color:var(--sub); text-decoration:none; font-size:14px;}
+.nav .links a:hover{color:var(--accent);}
+.wrap{max-width:820px; margin:0 auto; padding:56px 24px 96px;}
+header.hero{margin-bottom:36px;}
+h1{font-size:38px; line-height:1.12; font-weight:700; letter-spacing:-0.028em; margin-bottom:10px;}
+.subtitle{font-size:19px; color:var(--sub); margin-bottom:4px; letter-spacing:-0.01em;}
+.tagline{font-size:17px; color:#3a3a3c; margin-top:14px; max-width:660px;}
+h2{
+  font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--sub); margin:44px 0 14px;
+}
+p{margin:12px 0; max-width:680px;}
+ul{margin:8px 0 8px 20px; max-width:680px;}
+li{margin:6px 0;}
+strong{font-weight:650;}
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:22px 24px; margin:14px 0;
+}
+.row{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 4px;}
+.chip{
+  font-size:12.5px; color:var(--sub); background:var(--code-bg);
+  border-radius:7px; padding:2px 9px;
+}
+.links{margin-top:16px; font-size:15px;}
+.links a{margin-right:18px; color:var(--accent);}
+code{font-family:"SF Mono",Menlo,Consolas,monospace; font-size:.86em; background:var(--code-bg); padding:1px 5px; border-radius:5px;}
+.note{font-size:15px; color:var(--sub);}
+footer{
+  margin-top:72px; padding-top:24px; border-top:1px solid var(--line);
+  font-size:14px; color:var(--sub);
+}
+@media (max-width:600px){
+  h1{font-size:30px;}
+  .wrap{padding:36px 20px 72px;}
+  body{font-size:16px;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="/">Daizhi Liao</a>
+    <div class="links">
+      <a href="/#research">Research</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#opensource">Open Source</a>
+      <a href="/blog/">Blog</a>
+      <a href="/CV.html">CV</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <h1>TransitTruth</h1>
+    <p class="subtitle">A local CLI that checks whether an OpenAI-compatible endpoint actually serves the model it claims to.</p>
+    <div class="row">
+      <span class="chip">MIT license</span>
+      <span class="chip">v0.5.9</span>
+      <span class="chip">352 tests passing</span>
+      <span class="chip">Python CLI + local web UI</span>
+    </div>
+    <p class="tagline">You pay for <code>gpt-4o-mini</code> at a relay. Are you actually getting it? TransitTruth probes
+    tokenizer counts and behavioral baselines against a bundled reference fingerprint and returns one of
+    <code>pass</code> / <code>suspicious</code> / <code>insufficient_evidence</code> as a single JSON verdict.
+    It is probabilistic consistency evidence, not a cryptographic proof.</p>
+  </header>
+
+  <h2>Problem</h2>
+  <p>Third-party LLM relays and gateways commonly forward traffic under a claimed model name, and existing
+  gateways (one-api, new-api, LiteLLM) trust that field. A cheaper model can be substituted while billing
+  as the advertised one, and the buyer has no independent check from their own machine.</p>
+
+  <h2>What it does</h2>
+  <ul>
+    <li>Stateless fingerprint battery: tokenizer-count consistency, chi-square / KS distribution distance,
+    Bayesian log-odds self-consistency, and an Okapi-style resubstitution check.</li>
+    <li>Three-state verdict with confidence; fail-closed to <code>insufficient_evidence</code> when no
+    reference matches, rather than guessing.</li>
+    <li>The API key stays in session memory: it never touches disk, logs, or the report; the tool probes
+    only and does not forward traffic.</li>
+    <li>A local single-page web demo runs the same check in the browser without a paid API key, against a
+    bundled reference server.</li>
+  </ul>
+
+  <h2>Honest limits</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Probabilistic, not cryptographic.</strong> The verdict is auxiliary consistency evidence;
+      it cannot establish official-provider identity, and a relayed upstream can still look consistent.</li>
+      <li><strong>Local fingerprint coverage is limited.</strong> The bundle ships one open Qwen2.5 tokenizer
+      fingerprint; the gpt-4o / gpt-4o-mini baselines were collected through a single third-party relay,
+      not official endpoints.</li>
+      <li><strong>Temperature=0 replay is point-mass.</strong> A deterministic upstream can match on
+      repeated prompts; behavioral probes need more samples to separate a real match from a replay.</li>
+      <li><strong>Not published to PyPI yet.</strong> Install from source; the legacy billing/monitoring
+      web platform is a separate self-hosted app and is not part of this bundle.</li>
+    </ul>
+  </div>
+
+  <h2>Measured evidence (with qualifications)</h2>
+  <ul>
+    <li>91.3% in-distribution resubstitution posterior (training-set fit, not held-out generalization).</li>
+    <li>0.90 total-variation distance between claimed and observed response distributions (a distribution
+    gap, not an accuracy score).</li>
+    <li>88% Okapi resubstitution rate, Wilson interval [0.80, 0.93], same in-distribution caveat.</li>
+  </ul>
+  <p class="note">All numbers are reproduced in the committed reference-data transparency section and the
+  extended technical report; see the links below.</p>
+
+  <div class="links">
+    <a href="https://github.com/dafahaha/transit-truth" target="_blank" rel="noopener">Repository</a>
+    <a href="/transit-truth/">Offline web demo</a>
+    <a href="https://github.com/dafahaha/transit-truth/blob/main/docs/tech_report.pdf" target="_blank" rel="noopener">Technical report (PDF)</a>
+    <a href="/blog/ci-missing-deps.html">Build postmortem</a>
+  </div>
+
+  <footer>
+    <a href="/">&larr; Back to home</a>
+  </footer>
+</div>
+</body>
+</html>

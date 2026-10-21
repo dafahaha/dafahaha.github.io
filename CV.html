@@ -11,12 +11,12 @@
 <meta property="og:url" content="https://dafahaha.github.io/CV.html">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230071e3'/><text x='50' y='68' font-size='52' font-family='-apple-system,sans-serif' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>">
 <style>
-  @page { size: A4; margin: 10mm 13mm; }
+  @page { size: A4; margin: 9mm 12mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
       Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-    color: #1d1d1f; line-height: 1.38; font-size: 9.4pt; letter-spacing: -0.005em;
+    color: #1d1d1f; line-height: 1.32; font-size: 9.2pt; letter-spacing: -0.005em;
     -webkit-font-smoothing: antialiased;
   }
   a { color: #0071e3; text-decoration: none; }
@@ -26,16 +26,16 @@
   .contact a { color: #0071e3; }
   h2 {
     font-size: 9pt; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
-    color: #6e6e73; margin: 9px 0 4px; padding-bottom: 2px; border-bottom: 1px solid #e3e3e6;
+    color: #6e6e73; margin: 7px 0 3px; padding-bottom: 2px; border-bottom: 1px solid #e3e3e6;
   }
-  .item { margin: 5px 0; }
+  .item { margin: 3.5px 0; }
   .item .head { display: flex; justify-content: space-between; align-items: baseline; }
   .item .title { font-weight: 700; font-size: 10.3pt; }
   .item .when { color: #6e6e73; font-size: 9pt; white-space: nowrap; }
   .item p { margin: 2px 0 0; color: #1d1d1f; }
   .muted { color: #3a3a3c; }
   ul { margin: 3px 0 0 18px; }
-  li { margin: 2px 0; }
+  li { margin: 1.5px 0; }
   .edu-sub { color: #3a3a3c; margin-top: 2px; }
 </style>
 </head>
@@ -61,6 +61,20 @@
 
   <div class="item">
     <div class="head">
+      <span class="title">wm-audit &mdash; Preregistered Audit of World-Model Fidelity vs Control Utility</span>
+      <span class="when">2026</span>
+    </div>
+    <p>Single-machine CPU audit suite (reproducible, seeded) that separates world-model <em>perceptual fidelity</em> (next-frame
+    MSE / SSIM / NLL; fixed random-conv filter banks as stand-ins for learned metrics) from <em>control utility</em> (whether a
+    planner can solve the task). Reduced pilot on one env (pixel_nav, 3 seeds &times; 3 capacities, 12k steps): pixel fidelity weakly
+    predicted closed-loop return (H1 supported, |&rho;|=0.32&lt;0.4); control-relevant diagnostics did not (H2 not supported,
+    &rho;=0.26&lt;0.6); INT8 compression did not degrade calibration faster than raw fidelity (H3 not supported). The locked
+    200k-step &times; 5-seed &times; 2-env main run has not been run; this is the preregistered reduced pilot only.
+    <br><span class="muted">Code: <a href="https://github.com/dafahaha/wm-audit">github.com/dafahaha/wm-audit</a></span></p>
+  </div>
+
+  <div class="item">
+    <div class="head">
       <span class="title">TransitTruth &mdash; Behavioral-Fingerprint Audit of AI API Relays</span>
       <span class="when">2026</span>
     </div>
@@ -78,7 +92,7 @@
     </div>
     <p>Soft Actor-Critic implemented from scratch in PyTorch (no Stable-Baselines3), run as a pre-registered three-arm controlled
     study on Hopper-v4 (CPU, 120k env steps, 3 seeds/arm): Baseline (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha
-    (0.1, automatic temperature off, &alpha; fixed at 0.2). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm):
+    (automatic temperature off, &alpha; fixed at 0.2). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm):
     Baseline 1085&plusmn;698, RewardScaled 1118&plusmn;623, FixedAlpha 1404&plusmn;632. Welch p: Baseline&ndash;FixedAlpha 0.59,
     Baseline&ndash;RewardScaled 0.95, FixedAlpha&ndash;RewardScaled 0.61; one-way ANOVA F=0.22, p=0.81 &mdash; no statistically
     distinguishable effect detected (n=3; the t-intervals overlap heavily). At 60k the reward-scaled arm looked ~3&times; better, but extending to the pre-registered 120k
@@ -104,15 +118,17 @@
     <li>TransitTruth: Extended Technical Report &mdash; behavioral probing, chi-square/KS &amp; Bayesian self-consistency, threats to validity (2026). <a href="https://github.com/dafahaha/transit-truth/blob/main/docs/tech_report.pdf">PDF</a>.</li>
   </ul>
 
-  <h2>Open Source &mdash; Merged Contributions</h2>
-  <ul>
-    <li><strong>microsoft/TextWorld #377</strong> (merged) &mdash; Fixed <code>env.step</code> crash on multi-command input; non-greedy score parsing plus regression test.</li>
-    <li><strong>shmuma/ptan #57</strong> (merged) &mdash; Fixed Gymnasium API compatibility in experience sources.</li>
-    <li><strong>Algorineko/AgenticArXiv-RL #72</strong> (merged) &mdash; Added MIT License, CONTRIBUTING guide, Code of Conduct, and CI.</li>
-    <li><strong>learnsyslab/gym-pybullet-drones #319</strong> (merged) &mdash; Replaced <code>print()</code> error statements with module logging; converted <code>exit()</code> calls to raised exceptions.</li>
-    <li><strong>Eclectic-Sheep/sheeprl #340</strong> (merged) &mdash; Added CONTRIBUTING guide and Code of Conduct.</li>
-  </ul>
-  <p class="muted" style="margin-top:3px;">Beyond merged work, additional pull requests are <strong>currently under review (not yet merged)</strong> upstream in e.g.&nbsp;vLLM, pandas, google/brax, Farama-Foundation/PettingZoo, thu-ml/tianshou, ContinualAI/avalanche, and Hugging Face datasets &amp; diffusers.</p>
+  <h2>Open Source &mdash; Merged Contributions (8)</h2>
+  <p style="margin:2px 0 0;"><strong>Code fixes:</strong>
+    <strong>microsoft/TextWorld #377</strong> &mdash; fixed <code>env.step</code> crash on multi-command input (non-greedy score parsing + regression test);
+    <strong>shmuma/ptan #57</strong> &mdash; fixed Gymnasium 5-tuple API compatibility in experience sources;
+    <strong>learnsyslab/gym-pybullet-drones #319</strong> &mdash; replaced <code>print()</code> errors with module logging and converted <code>exit()</code> calls to raised exceptions.</p>
+  <p class="muted" style="margin-top:3px;"><strong>Community &amp; documentation (not code):</strong>
+    Eclectic-Sheep/sheeprl #340 (CONTRIBUTING, Code of Conduct);
+    Algorineko/AgenticArXiv-RL #72 (MIT LICENSE, CONTRIBUTING, CoC, CI);
+    FluxVLA #122 (<code>bloat16</code>&rarr;<code>bf16</code> typo) and #123 (community docs);
+    scadastrangelove/awesome-ai-security-tools #165 (WATCHLIST entry, 2026-10-21).</p>
+  <p class="muted" style="margin-top:3px;">Beyond merged work, additional code PRs are <strong>currently under review (not yet merged)</strong> upstream in e.g.&nbsp;vLLM, pandas, google/brax, Farama-Foundation/PettingZoo, thu-ml/tianshou, ContinualAI/avalanche, and Hugging Face datasets &amp; diffusers.</p>
 
   <h2>Technical Skills</h2>
   <p><strong>RL &amp; learning:</strong> PyTorch, Stable-Baselines3, Gymnasium, MuJoCo &nbsp;|&nbsp;

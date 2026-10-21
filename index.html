@@ -105,8 +105,9 @@ footer{
     <p class="subtitle">Third-year undergraduate, Guangzhou University &middot; Network Engineering</p>
     <p class="subtitle">Applying to PhD programs in Fall 2027 &middot; Embodied AI / Reinforcement Learning / Robotics</p>
     <p class="tagline">I lead a small set of my own tools and studies — things that test what a
-    deployed model actually does, not what it claims to do — and I contribute a limited number of
-    fixes upstream in depth, rather than scattering patches across many repos.</p>
+    deployed model actually does, not what it claims to do. My open-source work began with a broad
+    exploratory phase of small PRs across many RL/ML repos; I've since narrowed to a few in-depth
+    upstream fixes, which is what the section below leads with.</p>
   </header>
 
   <section id="research">
@@ -138,6 +139,7 @@ footer{
         <span class="chip">Bayesian Inference</span><span class="chip">Client-side JS</span>
       </div>
       <div class="links">
+        <a href="transit-truth.html">Project details</a>
         <a href="https://github.com/dafahaha/transit-truth" target="_blank" rel="noopener">GitHub</a>
         <a href="https://dafahaha.github.io/transit-truth/" target="_blank" rel="noopener">Live Demo</a>
         <a href="https://github.com/dafahaha/transit-truth/blob/main/docs/tech_report.pdf" target="_blank" rel="noopener">Technical Report (PDF)</a>
@@ -161,6 +163,7 @@ footer{
         <span class="chip">Preregistration</span><span class="chip">CPU</span>
       </div>
       <div class="links">
+        <a href="wm-audit.html">Project details</a>
         <a href="https://github.com/dafahaha/wm-audit" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/LEADERBOARD.md" target="_blank" rel="noopener">Pilot Results</a>
       </div>
@@ -171,7 +174,7 @@ footer{
       <div class="meta">Pre-registered three-arm controlled study &middot; Hopper-v4 &middot; CPU, 120k steps &middot; 2026</div>
       <p>A Soft Actor-Critic implementation written from scratch in PyTorch (no Stable-Baselines3), run as a
       pre-registered three-arm controlled study on Hopper-v4 (CPU, 120k env steps, 3 seeds/arm): Baseline
-      (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha (0.1, automatic temperature off, &alpha; fixed at
+      (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha (automatic temperature off, &alpha; fixed at
       0.2). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm): Baseline 1085&plusmn;698,
       RewardScaled 1118&plusmn;623, FixedAlpha 1404&plusmn;632. Welch p: Baseline&ndash;FixedAlpha 0.59,
       Baseline&ndash;RewardScaled 0.95, FixedAlpha&ndash;RewardScaled 0.61; ANOVA F=0.22, p=0.81 —
@@ -209,8 +212,10 @@ footer{
 
   <section id="opensource">
     <h2>Open Source</h2>
-    <p>I contribute a small number of fixes upstream to RL and AI infrastructure, in depth rather than
-    scattershot. Merged code work:</p>
+    <p>After an early, broad exploratory phase of small docs/fix PRs across many RL/ML repos, I've
+    narrowed to a few in-depth upstream fixes. Eight contributions are merged: three code fixes
+    below, and five community/documentation entries listed separately (not code fixes).</p>
+    <p style="font-size:15px;color:var(--sub);margin:14px 0 4px;"><strong style="color:var(--ink);font-weight:600;">Merged code fixes</strong></p>
     <table>
       <thead><tr><th>Project</th><th>PR</th><th>What I fixed</th></tr></thead>
       <tbody>
@@ -222,20 +227,23 @@ footer{
         <tr>
           <td><a href="https://github.com/shmuma/ptan/pull/57" target="_blank" rel="noopener">shmuma/ptan</a></td>
           <td>#57 <span class="pill">merged</span></td>
-          <td>Fixed Gymnasium API compatibility in experience sources.</td>
+          <td>Fixed Gymnasium 5-tuple API compatibility in experience sources.</td>
         </tr>
         <tr>
           <td><a href="https://github.com/learnsyslab/gym-pybullet-drones/pull/319" target="_blank" rel="noopener">learnsyslab/gym-pybullet-drones</a></td>
           <td>#319 <span class="pill">merged</span></td>
           <td>Replaced <code>print()</code> error statements with module logging; converted <code>exit()</code> calls to raised exceptions.</td>
         </tr>
-        <tr>
-          <td><a href="https://github.com/Eclectic-Sheep/sheeprl/pull/340" target="_blank" rel="noopener">Eclectic-Sheep/sheeprl</a></td>
-          <td>#340 <span class="pill">merged</span></td>
-          <td>Added CONTRIBUTING guide and Code of Conduct.</td>
-        </tr>
       </tbody>
     </table>
+    <p style="font-size:15px;color:var(--sub);margin:18px 0 4px;"><strong style="color:var(--ink);font-weight:600;">Merged community &amp; documentation</strong></p>
+    <ul style="font-size:15px;color:#3a3a3c;">
+      <li><a href="https://github.com/Eclectic-Sheep/sheeprl/pull/340" target="_blank" rel="noopener">Eclectic-Sheep/sheeprl #340</a> &mdash; CONTRIBUTING guide and Code of Conduct.</li>
+      <li><a href="https://github.com/Algorineko/AgenticArXiv-RL/pull/72" target="_blank" rel="noopener">Algorineko/AgenticArXiv-RL #72</a> &mdash; MIT LICENSE, CONTRIBUTING, Code of Conduct, and CI workflow.</li>
+      <li><a href="https://github.com/FluxVLA/FluxVLA/pull/122" target="_blank" rel="noopener">FluxVLA #122</a> &mdash; typo rename <code>bloat16</code> &rarr; <code>bf16</code> in the BFloat16 support check.</li>
+      <li><a href="https://github.com/FluxVLA/FluxVLA/pull/123" target="_blank" rel="noopener">FluxVLA #123</a> &mdash; community docs: CONTRIBUTING, Code of Conduct, CHANGELOG, issue templates.</li>
+      <li><a href="https://github.com/scadastrangelove/awesome-ai-security-tools/pull/165" target="_blank" rel="noopener">scadastrangelove/awesome-ai-security-tools #165</a> &mdash; added TransitTruth to the WATCHLIST (merged 2026-10-21).</li>
+    </ul>
 
     <p style="margin-top:24px;">Selected code PRs currently <strong>under review (not yet merged)</strong> in upstream RL/ML infrastructure:</p>
     <table>
@@ -296,11 +304,16 @@ footer{
           <td>#68968 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
           <td>Fixed <code>to_html</code> href escaping with render_links + escape.</td>
         </tr>
+        <tr>
+          <td><a href="https://github.com/RLE-Bench/RLE-Bench/pull/9" target="_blank" rel="noopener">RLE-Bench/RLE-Bench</a></td>
+          <td>#9 <span style="display:inline-block;font-size:12px;color:#8a6d00;background:rgba(255,149,0,.12);border-radius:999px;padding:1px 9px;font-weight:600;">under review</span></td>
+          <td>Recorded per-trial status/reason/timing in summary.json; resolved embedded final-step reward from the step directory.</td>
+        </tr>
       </tbody>
     </table>
-    <p style="font-size:15px;color:var(--sub);margin-top:18px;">Smaller docs / community-health PRs (LICENSE, CONTRIBUTING,
-      Code of Conduct, CI setup) across a number of smaller RL/ML projects, plus a typo fix in FluxVLA.
-      Root-cause writeups live on my <a href="/blog/">blog</a>:
+    <p style="font-size:15px;color:var(--sub);margin-top:18px;">Other early exploratory PRs across smaller
+      RL/ML projects remain open or unanswered; they are part of the broad phase noted above, not deep
+      work. Root-cause writeups live on my <a href="/blog/">blog</a>:
       <a href="/blog/textworld-bug-fix.html">the TextWorld multi-command regex fix</a>, and
       <a href="/blog/ci-missing-deps.html">a postmortem on numpy/scipy missing from requirements</a>.</p>
   </section>

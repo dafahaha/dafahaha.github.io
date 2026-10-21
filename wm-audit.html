@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wm-audit — Daizhi Liao</title>
+<meta name="description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Reduced pilot, honest limits.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230071e3'/><text x='50' y='68' font-size='52' font-family='-apple-system,sans-serif' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>">
+<style>
+:root{
+  --ink:#1d1d1f; --sub:#6e6e73; --bg:#fbfbfd; --card:#ffffff;
+  --code-bg:#f5f5f7; --line:#e3e3e6; --accent:#0071e3;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+a{color:var(--accent); text-decoration:none;}
+a:hover{text-decoration:underline;}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",
+    "Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.7; font-size:17px; letter-spacing:-0.01em;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+.nav{
+  position:sticky; top:0; z-index:10;
+  background:rgba(251,251,253,.8); backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav .inner{
+  max-width:820px; margin:0 auto; padding:14px 24px;
+  display:flex; align-items:baseline; gap:20px; flex-wrap:wrap;
+}
+.nav .brand{font-weight:700; font-size:16px; letter-spacing:-0.01em; color:var(--ink); text-decoration:none;}
+.nav .links{margin-left:auto; display:flex; gap:18px; flex-wrap:wrap;}
+.nav .links a{color:var(--sub); text-decoration:none; font-size:14px;}
+.nav .links a:hover{color:var(--accent);}
+.wrap{max-width:820px; margin:0 auto; padding:56px 24px 96px;}
+header.hero{margin-bottom:36px;}
+h1{font-size:38px; line-height:1.12; font-weight:700; letter-spacing:-0.028em; margin-bottom:10px;}
+.subtitle{font-size:19px; color:var(--sub); margin-bottom:4px; letter-spacing:-0.01em;}
+.tagline{font-size:17px; color:#3a3a3c; margin-top:14px; max-width:660px;}
+h2{
+  font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--sub); margin:44px 0 14px;
+}
+p{margin:12px 0; max-width:680px;}
+ul{margin:8px 0 8px 20px; max-width:680px;}
+li{margin:6px 0;}
+strong{font-weight:650;}
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:22px 24px; margin:14px 0;
+}
+.row{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 4px;}
+.chip{
+  font-size:12.5px; color:var(--sub); background:var(--code-bg);
+  border-radius:7px; padding:2px 9px;
+}
+.links{margin-top:16px; font-size:15px;}
+.links a{margin-right:18px; color:var(--accent);}
+code{font-family:"SF Mono",Menlo,Consolas,monospace; font-size:.86em; background:var(--code-bg); padding:1px 5px; border-radius:5px;}
+table{border-collapse:collapse; width:100%; max-width:720px; margin:10px 0; font-size:15px;}
+th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+th{font-weight:600; color:var(--sub); font-size:13px; letter-spacing:0.02em;}
+.note{font-size:15px; color:var(--sub);}
+footer{
+  margin-top:72px; padding-top:24px; border-top:1px solid var(--line);
+  font-size:14px; color:var(--sub);
+}
+@media (max-width:600px){
+  h1{font-size:30px;}
+  .wrap{padding:36px 20px 72px;}
+  body{font-size:16px;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="inner">
+    <a class="brand" href="/">Daizhi Liao</a>
+    <div class="links">
+      <a href="/#research">Research</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#opensource">Open Source</a>
+      <a href="/blog/">Blog</a>
+      <a href="/CV.html">CV</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <h1>wm-audit</h1>
+    <p class="subtitle">A preregistered CPU audit suite that asks which world-model diagnostics actually predict closed-loop control.</p>
+    <div class="row">
+      <span class="chip">Preregistered</span>
+      <span class="chip">Reduced pilot (n=9)</span>
+      <span class="chip">57 tests</span>
+      <span class="chip">Single-machine CPU</span>
+    </div>
+    <p class="tagline">World models are trained and reported on pixel fidelity (MSE, NLL, FVD), but planners
+    consume counterfactual action effects and reward predictions. wm-audit measures each diagnostic against
+    the real closed-loop return and correlates them across seed and capacity, with percentile-bootstrap CIs
+    and Holm-corrected p-values fixed before seeing data.</p>
+  </header>
+
+  <h2>Problem</h2>
+  <p>Perceptual fidelity numbers can look good while a planner still fails to solve the task. Without a
+  preregistered split between "looks right" and "controls well", a model can be selected on the wrong axis.</p>
+
+  <h2>Pilot findings (pixel_nav, 3 seeds &times; 3 capacities, 12k steps)</h2>
+  <table>
+    <thead><tr><th>Hypothesis</th><th>Observed</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>H1: pixel composite weakly tracks return (|ρ| &lt; 0.4)</td>
+        <td>ρ = −0.317, |ρ| = 0.32</td>
+        <td>Supported (weak)</td>
+      </tr>
+      <tr>
+        <td>H2: control composite predicts return (ρ &gt; 0.6)</td>
+        <td>ρ = 0.259</td>
+        <td>Not supported</td>
+      </tr>
+      <tr>
+        <td>H3: INT8 degrades calibration faster than pixel fidelity (n_pairs=9)</td>
+        <td>pixel 0.433 &gt; control 0.352</td>
+        <td>Not supported</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">Strongest single diagnostic: <code>uncertainty_rho</code> ρ = 0.70, Holm-adjusted p = 0.393
+  (not significant). All Holm-adjusted p-values are non-significant at n=9; these are directional signals,
+  not confirmed effects.</p>
+
+  <h2>Honest limits</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Reduced pilot, not the main run.</strong> One built-in env (pixel_nav), 3 seeds &times; 3
+      capacities, 12k train steps; the locked 200k-step &times; 5-seed &times; 2-env main experiment has not
+      been run.</li>
+      <li><strong>Stand-in perceptual metrics.</strong> <code>pixel_lpips</code> and <code>rollout_fvd</code>
+      are deterministic seeded random-conv filter banks standing in for learned VGG/AlexNet backbones; real
+      numbers, reproducible, but not publication-grade LPIPS/FVD.</li>
+      <li><strong>Underpowered.</strong> n=9 float rows; bootstrap CIs are wide and every adjusted p is
+      non-significant. Treat findings as hypotheses for the main run, not conclusions.</li>
+      <li><strong>Windows constraint.</strong> dm_control cartpole is unavailable on Windows; the pilot uses
+      the built-in pixel_nav env only.</li>
+    </ul>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/dafahaha/wm-audit" target="_blank" rel="noopener">Repository</a>
+    <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/LEADERBOARD.md" target="_blank" rel="noopener">Pilot leaderboard</a>
+    <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/results_main.json" target="_blank" rel="noopener">Committed results (JSON)</a>
+  </div>
+
+  <footer>
+    <a href="/">&larr; Back to home</a>
+  </footer>
+</div>
+</body>
+</html>
