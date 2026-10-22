@@ -80,19 +80,20 @@
     </div>
     <p>Solo design &amp; implementation. Open-source tool that verifies whether an AI API relay actually serves the advertised
     model, by probing statistical behavior (random-number, token, latency distributions) against baselines with chi-square /
-    KS tests and Bayesian updating. Built a zero-install, fully client-side web demo and a technical report validating
+    KS tests and Bayesian updating. A guided offline demo accompanies the tool (run the real audit locally with
+    <code>transit-truth serve</code>); a technical report validates
     same-family discrimination: gpt-4o vs gpt-4o-mini, TVD up to 0.90, 91.3% in-distribution resubstitution posterior (not held-out).
     <br><span class="muted">Code &amp; demo: <a href="https://github.com/dafahaha/transit-truth">github.com/dafahaha/transit-truth</a> &middot; <a href="https://dafahaha.github.io/transit-truth/">live demo</a></span></p>
   </div>
 
   <div class="item">
     <div class="head">
-      <span class="title">embodied-offpolicy-study &mdash; Pre-registered Three-Arm SAC Study on Hopper-v4</span>
+      <span class="title">embodied-offpolicy-study &mdash; Pre-registered Two-Arm SAC Study with Logged Third-Arm Amendment on Hopper-v4</span>
       <span class="when">2026</span>
     </div>
-    <p>Soft Actor-Critic implemented from scratch in PyTorch (no Stable-Baselines3), run as a pre-registered three-arm controlled
-    study on Hopper-v4 (CPU, 120k env steps, 3 seeds/arm): Baseline (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha
-    (automatic temperature off, &alpha; fixed at 0.2). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm):
+    <p>Soft Actor-Critic implemented from scratch in PyTorch (no Stable-Baselines3), run as a pre-registered two-arm controlled
+    study with a logged third-arm (FixedAlpha) amendment on Hopper-v4 (CPU, 120k env steps, 3 seeds/arm): Baseline (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha
+    (scale=0.1, &alpha; fixed at 0.2; automatic temperature off). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm):
     Baseline 1085&plusmn;698, RewardScaled 1118&plusmn;623, FixedAlpha 1404&plusmn;632. Welch p: Baseline&ndash;FixedAlpha 0.59,
     Baseline&ndash;RewardScaled 0.95, FixedAlpha&ndash;RewardScaled 0.61; one-way ANOVA F=0.22, p=0.81 &mdash; no statistically
     distinguishable effect detected (n=3; the t-intervals overlap heavily). At 60k the reward-scaled arm looked ~3&times; better, but extending to the pre-registered 120k
@@ -122,7 +123,7 @@
   <p style="margin:2px 0 0;"><strong>Code fixes:</strong>
     <strong>microsoft/TextWorld #377</strong> &mdash; fixed <code>env.step</code> crash on multi-command input (non-greedy score parsing + regression test);
     <strong>shmuma/ptan #57</strong> &mdash; fixed Gymnasium 5-tuple API compatibility in experience sources;
-    <strong>learnsyslab/gym-pybullet-drones #319</strong> &mdash; replaced <code>print()</code> errors with module logging and converted <code>exit()</code> calls to raised exceptions.</p>
+    <strong>learnsyslab/gym-pybullet-drones #319</strong> &mdash; converted <code>print()</code>+<code>exit()</code> error paths to raised exceptions across 8 files.</p>
   <p class="muted" style="margin-top:3px;"><strong>Community &amp; documentation (not code):</strong>
     Eclectic-Sheep/sheeprl #340 (CONTRIBUTING, Code of Conduct);
     Algorineko/AgenticArXiv-RL #72 (MIT LICENSE, CONTRIBUTING, CoC, CI);

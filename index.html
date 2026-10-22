@@ -75,10 +75,14 @@ footer{
   margin-top:72px; padding-top:24px; border-top:1px solid var(--line);
   font-size:14px; color:var(--sub); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
 }
+.table-wrap{margin:10px 0;}
 @media (max-width:600px){
   .wrap{padding:40px 18px 72px;}
   h1{font-size:33px;} .subtitle{font-size:17px;}
   .nav .links{gap:14px;}
+  .table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  td,th{word-break:break-word;}
+  td code{word-break:break-word;}
 }
 </style>
 </head>
@@ -129,7 +133,8 @@ footer{
       <p>An open-source system that checks whether an AI API relay actually serves the model it advertises.
       Instead of trusting the relay's label, it probes the model's statistical behavior — random-number,
       token, and latency distributions — and compares them against a baseline using chi-square / KS tests
-      with Bayesian updating. A zero-install, fully client-side web demo lets anyone run the audit in ~30s.
+      with Bayesian updating. A guided offline demo walks through the flow; run the real audit locally
+      with <code>transit-truth serve</code>.
       The accompanying extended technical report validates same-family discrimination (gpt-4o vs gpt-4o-mini,
       TVD up to 0.90, 91.3% in-distribution resubstitution posterior — self-consistency on the baseline's
       own reference, not held-out accuracy), focusing on fine-grained distinctions that
@@ -171,11 +176,11 @@ footer{
 
     <div class="project">
       <h3>embodied-offpolicy-study</h3>
-      <div class="meta">Pre-registered three-arm controlled study &middot; Hopper-v4 &middot; CPU, 120k steps &middot; 2026</div>
+      <div class="meta">Pre-registered two-arm study with a logged third-arm (FixedAlpha) amendment &middot; Hopper-v4 &middot; CPU, 120k steps &middot; 2026</div>
       <p>A Soft Actor-Critic implementation written from scratch in PyTorch (no Stable-Baselines3), run as a
-      pre-registered three-arm controlled study on Hopper-v4 (CPU, 120k env steps, 3 seeds/arm): Baseline
-      (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha (automatic temperature off, &alpha; fixed at
-      0.2). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm): Baseline 1085&plusmn;698,
+      pre-registered two-arm controlled study with a logged third-arm (FixedAlpha) amendment on Hopper-v4
+      (CPU, 120k env steps, 3 seeds/arm): Baseline (reward scale 1.0) vs RewardScaled (0.1) vs FixedAlpha
+      (scale=0.1, &alpha; fixed at 0.2; automatic temperature off). Mean return &plusmn; SD (final window 105k&ndash;120k, n=3/arm): Baseline 1085&plusmn;698,
       RewardScaled 1118&plusmn;623, FixedAlpha 1404&plusmn;632. Welch p: Baseline&ndash;FixedAlpha 0.59,
       Baseline&ndash;RewardScaled 0.95, FixedAlpha&ndash;RewardScaled 0.61; ANOVA F=0.22, p=0.81 —
       <em>no statistically distinguishable effect detected</em> (n=3; t-intervals overlap heavily). The study's value: at 60k the reward-scaled arm looked ~3&times; better, but extending to the
@@ -216,6 +221,7 @@ footer{
     narrowed to a few in-depth upstream fixes. Eight contributions are merged: three code fixes
     below, and five community/documentation entries listed separately (not code fixes).</p>
     <p style="font-size:15px;color:var(--sub);margin:14px 0 4px;"><strong style="color:var(--ink);font-weight:600;">Merged code fixes</strong></p>
+    <div class="table-wrap">
     <table>
       <thead><tr><th>Project</th><th>PR</th><th>What I fixed</th></tr></thead>
       <tbody>
@@ -232,10 +238,11 @@ footer{
         <tr>
           <td><a href="https://github.com/learnsyslab/gym-pybullet-drones/pull/319" target="_blank" rel="noopener">learnsyslab/gym-pybullet-drones</a></td>
           <td>#319 <span class="pill">merged</span></td>
-          <td>Replaced <code>print()</code> error statements with module logging; converted <code>exit()</code> calls to raised exceptions.</td>
+          <td>Converted <code>print()</code>+<code>exit()</code> error paths to raised exceptions across 8 files.</td>
         </tr>
       </tbody>
     </table>
+    </div>
     <p style="font-size:15px;color:var(--sub);margin:18px 0 4px;"><strong style="color:var(--ink);font-weight:600;">Merged community &amp; documentation</strong></p>
     <ul style="font-size:15px;color:#3a3a3c;">
       <li><a href="https://github.com/Eclectic-Sheep/sheeprl/pull/340" target="_blank" rel="noopener">Eclectic-Sheep/sheeprl #340</a> &mdash; CONTRIBUTING guide and Code of Conduct.</li>
@@ -246,6 +253,7 @@ footer{
     </ul>
 
     <p style="margin-top:24px;">Selected code PRs currently <strong>under review (not yet merged)</strong> in upstream RL/ML infrastructure:</p>
+    <div class="table-wrap">
     <table>
       <thead><tr><th>Project</th><th>PR</th><th>What I fixed</th></tr></thead>
       <tbody>
@@ -311,6 +319,7 @@ footer{
         </tr>
       </tbody>
     </table>
+    </div>
     <p style="font-size:15px;color:var(--sub);margin-top:18px;">Other early exploratory PRs across smaller
       RL/ML projects remain open or unanswered; they are part of the broad phase noted above, not deep
       work. Root-cause writeups live on my <a href="/blog/">blog</a>:

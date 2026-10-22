@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TransitTruth — Daizhi Liao</title>
 <meta name="description" content="TransitTruth: a local CLI that probes an OpenAI-compatible endpoint for probabilistic model-identity consistency. Probabilistic evidence, not a cryptographic proof.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TransitTruth — Daizhi Liao">
+<meta property="og:description" content="TransitTruth: a local CLI that probes an OpenAI-compatible endpoint for probabilistic model-identity consistency. Probabilistic evidence, not a cryptographic proof.">
+<meta property="og:url" content="https://dafahaha.github.io/transit-truth.html">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230071e3'/><text x='50' y='68' font-size='52' font-family='-apple-system,sans-serif' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>">
 <style>
 :root{
@@ -93,7 +97,7 @@ footer{
     <div class="row">
       <span class="chip">MIT license</span>
       <span class="chip">v0.5.9</span>
-      <span class="chip">352 tests passing</span>
+      <span class="chip">352 passed / 7 skipped</span>
       <span class="chip">Python CLI + local web UI</span>
     </div>
     <p class="tagline">You pay for <code>gpt-4o-mini</code> at a relay. Are you actually getting it? TransitTruth probes
@@ -115,8 +119,8 @@ footer{
     reference matches, rather than guessing.</li>
     <li>The API key stays in session memory: it never touches disk, logs, or the report; the tool probes
     only and does not forward traffic.</li>
-    <li>A local single-page web demo runs the same check in the browser without a paid API key, against a
-    bundled reference server.</li>
+    <li>A guided offline web demo walks through the check with bundled seed data; the real audit runs locally
+    with <code>transit-truth serve</code>.</li>
   </ul>
 
   <h2>Honest limits</h2>
