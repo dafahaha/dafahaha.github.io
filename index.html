@@ -325,6 +325,20 @@ footer{
       work. Root-cause writeups live on my <a href="/blog/">blog</a>:
       <a href="/blog/textworld-bug-fix.html">the TextWorld multi-command regex fix</a>, and
       <a href="/blog/ci-missing-deps.html">a postmortem on numpy/scipy missing from requirements</a>.</p>
+
+    <p style="font-size:15px;color:var(--sub);margin:22px 0 4px;"><strong style="color:var(--ink);font-weight:600;">Agent skills &amp; tools</strong></p>
+    <p style="font-size:14px;color:var(--sub);margin:0 0 8px;">Small, focused, offline tools I built to keep RL
+      reporting and API-relay setup honest. They are zero-dependency local utilities (not services); each
+      ships with its own test suite.</p>
+    <ul style="font-size:14.5px;color:#3a3a3c;">
+      <li><a href="https://github.com/dafahaha/seedlot" target="_blank" rel="noopener">seedlot</a> &mdash; aggregate per-seed RL logs into mean&nbsp;&plusmn;&nbsp;std, IQR and 95% CI; blocks single-seed superiority claims.</li>
+      <li><a href="https://github.com/dafahaha/policy-parity" target="_blank" rel="noopener">policy-parity</a> &mdash; compare FP32 vs quantized/exported action logs (MAE, cosine, tolerance) before deployment.</li>
+      <li><a href="https://github.com/dafahaha/claim-boundary" target="_blank" rel="noopener">claim-boundary</a> &mdash; check a draft's wording against the scope actually measured (seeds, arms, envs).</li>
+      <li><a href="https://github.com/dafahaha/relay-preflight" target="_blank" rel="noopener">relay-preflight</a> &mdash; offline hygiene scan for relay/aggregator configs (inline keys, Bearer, plaintext http).</li>
+      <li><a href="https://github.com/dafahaha/dsh-model-probe" target="_blank" rel="noopener">dsh-model-probe</a> &mdash; a DSH plugin that runs the local model-authenticity check from a settings page.</li>
+    </ul>
+    <p style="font-size:14px;color:var(--sub);margin:8px 0 0;">Research notes and figures from the offline-policy
+      study are published as a <a href="/embodied-offpolicy-study/">GitHub Pages notebook</a>.</p>
   </section>
 
   <section id="skills">
