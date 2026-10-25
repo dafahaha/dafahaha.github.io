@@ -66,8 +66,10 @@
     </div>
     <p>Single-machine CPU audit suite (reproducible, seeded) that separates world-model <em>perceptual fidelity</em> (next-frame
     MSE / SSIM / NLL; fixed random-conv filter banks as stand-ins for learned metrics) from <em>control utility</em> (whether a
-    planner can solve the task). Reduced pilot on one env (pixel_nav, 3 seeds &times; 3 capacities, 12k steps): pixel fidelity weakly
-    predicted closed-loop return (H1 supported, |&rho;|=0.32&lt;0.4); control-relevant diagnostics did not (H2 not supported,
+    planner can solve the task). Reduced pilot on one env (pixel_nav, 3 seeds &times; 3 capacities, 12k steps): H1 threshold
+    met &mdash; pixel fidelity weakly tracked closed-loop return at |&rho;|=0.32&lt;0.4, but this is a weak, tentative
+    exploratory signal only (n=9; 95% CI crosses zero, Holm-adj p=1.0 &rarr; not statistically significant, not an
+    established finding); control-relevant diagnostics did not (H2 not supported,
     &rho;=0.26&lt;0.6); INT8 compression did not degrade calibration faster than raw fidelity (H3 not supported). The locked
     200k-step &times; 5-seed &times; 2-env main run has not been run; this is the preregistered reduced pilot only.
     <br><span class="muted">Code: <a href="https://github.com/dafahaha/wm-audit">github.com/dafahaha/wm-audit</a></span></p>
@@ -134,8 +136,8 @@
 
   <h2>Technical Skills</h2>
   <p><strong>RL &amp; learning:</strong> PyTorch, Stable-Baselines3, Gymnasium, MuJoCo &nbsp;|&nbsp;
-  <strong>Deployment:</strong> ONNX, ONNX Runtime, TensorRT, TorchScript, INT8/FP16 quantization &nbsp;|&nbsp;
-  <strong>Systems:</strong> Python, C++, Linux, Docker, Git, CI/CD, CUDA</p>
+  <strong>Deployment:</strong> ONNX, ONNX Runtime, TorchScript, INT8/FP16 quantization; TensorRT (experimental, not yet benchmarked) &nbsp;|&nbsp;
+  <strong>Systems:</strong> Python, Linux, Docker, Git, CI/CD; CUDA (learning, no GPU-measured results yet)</p>
 
 </body>
 </html>

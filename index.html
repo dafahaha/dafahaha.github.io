@@ -159,10 +159,12 @@ footer{
       LPIPS / rollout FVD — deterministic random-conv filter banks, <em>not</em> learned VGG/AlexNet
       backbones) from its <strong>control utility</strong> (whether a planner can actually solve the
       task using it). A reduced pilot on one env (pixel_nav, 3 seeds &times; 3 capacities, 12k steps)
-      found: pixel fidelity weakly predicts closed-loop return (H1 supported, |&rho;|=0.32&lt;0.4);
-      control-relevant diagnostics did not (H2 not supported, &rho;=0.26&lt;0.6); INT8 compression did not
-      degrade calibration faster than raw pixel fidelity (H3 not supported, n_pairs=9). This is a CPU
-      reduced pilot, not the locked 200k-step &times; 5-seed &times; 2-env main run.</p>
+      found: H1 threshold met &mdash; pixel fidelity weakly tracks closed-loop return at
+      |&rho;|=0.32&lt;0.4, but this is a weak, tentative exploratory signal only (n=9 pilot; the 95% CI
+      crosses zero and Holm-adj p=1.0, so it is <em>not statistically significant</em> and not an
+      established finding); control-relevant diagnostics did not (H2 not supported, &rho;=0.26&lt;0.6);
+      INT8 compression did not degrade calibration faster than raw pixel fidelity (H3 not supported,
+      n_pairs=9). This is a CPU reduced pilot, not the locked 200k-step &times; 5-seed &times; 2-env main run.</p>
       <div class="row">
         <span class="chip">PyTorch</span><span class="chip">World Models</span>
         <span class="chip">Preregistration</span><span class="chip">CPU</span>
@@ -207,7 +209,7 @@ footer{
       target deployment path, not yet measured on device.</p>
       <div class="row">
         <span class="chip">Python</span><span class="chip">PyTorch</span>
-        <span class="chip">TensorRT</span><span class="chip">ONNX</span><span class="chip">CPU/GPU</span>
+        <span class="chip">TensorRT (experimental)</span><span class="chip">ONNX</span><span class="chip">CPU/GPU</span>
       </div>
       <div class="links">
         <a href="https://github.com/dafahaha/rl-deploy-bench" target="_blank" rel="noopener">GitHub Repository</a>
@@ -346,8 +348,8 @@ footer{
     <h2>Technical Skills</h2>
     <ul>
       <li><strong>RL &amp; learning:</strong> PyTorch, Stable-Baselines3, Gymnasium, MuJoCo</li>
-      <li><strong>Deployment:</strong> ONNX, ONNX Runtime, TensorRT, TorchScript, INT8/FP16 quantization</li>
-      <li><strong>Systems:</strong> Python, C++, Linux, Docker, Git, CI/CD, CUDA</li>
+      <li><strong>Deployment:</strong> ONNX, ONNX Runtime, TorchScript, INT8/FP16 quantization; TensorRT (experimental backend, not yet benchmarked)</li>
+      <li><strong>Systems:</strong> Python, Linux, Docker, Git, CI/CD; CUDA (learning &mdash; deployment code written, no GPU-measured results yet)</li>
     </ul>
   </section>
 
