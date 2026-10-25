@@ -107,10 +107,11 @@
       <span class="title">rl-deploy-bench &mdash; Cross-Platform RL Deployment &amp; Benchmarking</span>
       <span class="when">v1.1.0</span>
     </div>
-    <p>Config-driven CLI: export Stable-Baselines3 policies to ONNX/TorchScript, build TensorRT engines with FP16/INT8
-    quantization, and benchmark latency, throughput, and accuracy across x86 GPU and CPU, with auto-generated HTML
-    reports. Jetson/edge is a target deployment path, not yet measured on device. A reproducible harness for the
-    accuracy&ndash;latency tradeoff of quantized RL policies.</p>
+    <p>Config-driven CLI: export Stable-Baselines3 policies to ONNX/TorchScript, quantize to FP16/INT8, and
+    benchmark latency, throughput, and accuracy across x86 GPU and CPU via ONNX Runtime, with auto-generated HTML
+    reports. An experimental standalone TensorRT engine-builder (FP16/INT8) is included but not yet wired into the
+    benchmark harness (GPU-tested numbers tracked for v2.0). Jetson/edge is a target deployment path, not yet
+    measured on device. A reproducible harness for the accuracy&ndash;latency tradeoff of quantized RL policies.</p>
   </div>
 
   <h2>Publications &amp; Preprints</h2>

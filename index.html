@@ -200,10 +200,11 @@ footer{
     <div class="project">
       <h3>rl-deploy-bench</h3>
       <div class="meta">Cross-platform RL deployment &amp; benchmarking toolkit &middot; v1.1.0</div>
-      <p>A config-driven CLI that exports Stable-Baselines3 policies to ONNX/TorchScript and builds TensorRT
-      engines with FP16/INT8 quantization; benchmarks latency, throughput, and accuracy on x86 GPU and CPU,
-      with auto-generated HTML reports — a reproducible harness for the accuracy–latency tradeoff of quantized
-      RL policies. Jetson/edge is a target deployment path, not yet measured on device.</p>
+      <p>A config-driven CLI that exports Stable-Baselines3 policies to ONNX/TorchScript and quantizes to FP16/INT8;
+      benchmarks latency, throughput, and accuracy on x86 GPU and CPU via ONNX Runtime, with auto-generated HTML
+      reports. An experimental standalone TensorRT engine-builder is included but not yet wired into the benchmark
+      harness — a reproducible harness for the accuracy–latency tradeoff of quantized RL policies. Jetson/edge is a
+      target deployment path, not yet measured on device.</p>
       <div class="row">
         <span class="chip">Python</span><span class="chip">PyTorch</span>
         <span class="chip">TensorRT</span><span class="chip">ONNX</span><span class="chip">CPU/GPU</span>
