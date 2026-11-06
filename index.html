@@ -119,10 +119,10 @@ footer{
     <h1>Daizhi Liao</h1>
     <p class="subtitle">Fourth-year undergraduate (senior), Guangzhou University &middot; Network Engineering</p>
     <p class="subtitle">Applying for Fall 2027 PhD entry (applications due Dec 2026&ndash;Jan 2027) &middot; Embodied AI / Reinforcement Learning / Robotics</p>
-    <p class="tagline">I build a small set of self-directed tools and studies — things that test what a
-    deployed model actually does, not what it claims to do. My open-source work began with a broad
-    exploratory phase of small PRs across many RL/ML repos; I've since narrowed to a few in-depth
-    upstream fixes, which is what the section below leads with.</p>
+    <p class="tagline">I run small, preregistered RL studies on embodied control, and build the audit
+    tools that keep reported numbers honest — both are about the gap between what a system claims
+    and what it actually does. My open-source work began with a broad exploratory phase of small
+    PRs across many RL/ML repos; I've since narrowed to a few in-depth upstream fixes.</p>
   </header>
 
   <section id="research">
@@ -137,7 +137,7 @@ footer{
 
   <section id="projects">
     <h2>Selected Projects</h2>
-    <p style="font-size:15px;color:var(--sub);margin:0 0 2px;">Two preregistered research pilots whose null results are reported as null, one shipped auditing tool, and one engineering toolkit. Every number below traces to a committed artefact in the linked repository.</p>
+    <p style="font-size:15px;color:var(--sub);margin:0 0 2px;">Two preregistered research pilots whose null results are reported as null, one shipped auditing tool, and one engineering toolkit.</p>
 
     <div class="project">
       <h3>TransitTruth</h3>
@@ -147,10 +147,10 @@ footer{
       token, and latency distributions — and compares them against a baseline using chi-square / KS tests
       with Bayesian updating. A guided offline demo walks through the flow; run the real audit locally
       with <code>transit-truth serve</code>.
-      The accompanying extended technical report validates same-family discrimination (gpt-4o vs gpt-4o-mini,
-      TVD up to 0.90, 91.3% in-distribution resubstitution posterior — self-consistency on the baseline's
-      own reference, not held-out accuracy), focusing on fine-grained distinctions that
-      single-token fingerprinting does not reach.</p>
+      The accompanying technical report measures how far the two models' response distributions
+      diverge (TVD up to 0.90) and reports its identification statistics as in-distribution
+      resubstitution only — no held-out accuracy is claimed — focusing on fine-grained distinctions
+      that single-token fingerprinting does not reach.</p>
       <div class="row">
         <span class="chip">Python</span><span class="chip">Statistical Testing</span>
         <span class="chip">Bayesian Inference</span><span class="chip">Client-side JS</span>
@@ -277,7 +277,8 @@ footer{
       <li><a href="https://github.com/scadastrangelove/awesome-ai-security-tools/pull/165" target="_blank" rel="noopener">scadastrangelove/awesome-ai-security-tools #165</a> &mdash; added TransitTruth to the WATCHLIST (merged 2026-10-21).</li>
     </ul>
 
-    <p style="margin-top:24px;">Selected code PRs currently <strong>under review (not yet merged)</strong> in upstream RL/ML infrastructure:</p>
+    <p style="margin-top:24px;">Selected code PRs currently <strong>under review (not yet merged)</strong> in upstream RL/ML infrastructure.
+    All ten are single-file bug fixes; they are listed for transparency and are not counted as merged work.</p>
     <div class="table-wrap">
     <table>
       <thead><tr><th>Project</th><th>PR</th><th>What I fixed</th></tr></thead>
