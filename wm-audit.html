@@ -155,6 +155,12 @@ footer{
       numbers, reproducible, but not publication-grade LPIPS/FVD.</li>
       <li><strong>Underpowered.</strong> n=9 float rows; bootstrap CIs are wide and every adjusted p is
       non-significant. Treat findings as hypotheses for the main run, not conclusions.</li>
+      <li><strong>Not a recurrent world model.</strong> Training resets the GRU state to zeros every
+      batch and never unrolls sequences, so no temporal dependency is learned — the pilot is a
+      per-transition stand-in, not evidence about genuinely recurrent dynamics.</li>
+      <li><strong>Rank-collinearity (n=9).</strong> Five of the eleven diagnostics share one identical
+      rank pattern (ρ=0.317, p=0.4064, CI [−0.554, 0.947]), so multi-diagnostic agreement is not
+      five independent confirmations.</li>
       <li><strong>Windows constraint.</strong> dm_control cartpole is unavailable on Windows; the pilot uses
       the built-in pixel_nav env only.</li>
     </ul>
