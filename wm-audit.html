@@ -9,6 +9,9 @@
 <meta property="og:title" content="wm-audit — Daizhi Liao">
 <meta property="og:description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Reduced pilot, honest limits.">
 <meta property="og:url" content="https://dafahaha.github.io/wm-audit.html">
+<meta name="author" content="Daizhi Liao">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://dafahaha.github.io/wm-audit.html">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230071e3'/><text x='50' y='68' font-size='52' font-family='-apple-system,sans-serif' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>">
 <style>
 :root{
@@ -65,6 +68,7 @@ strong{font-weight:650;}
 .links a{margin-right:18px; color:var(--accent);}
 code{font-family:"SF Mono",Menlo,Consolas,monospace; font-size:.86em; background:var(--code-bg); padding:1px 5px; border-radius:5px;}
 table{border-collapse:collapse; width:100%; max-width:720px; margin:10px 0; font-size:15px;}
+.table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch;}
 th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
 th{font-weight:600; color:var(--sub); font-size:13px; letter-spacing:0.02em;}
 .note{font-size:15px; color:var(--sub);}
@@ -114,6 +118,7 @@ footer{
   preregistered split between "looks right" and "controls well", a model can be selected on the wrong axis.</p>
 
   <h2>Pilot findings (pixel_nav, 3 seeds &times; 3 capacities, 12k steps)</h2>
+  <div class="table-wrap">
   <table>
     <thead><tr><th>Hypothesis</th><th>Observed</th><th>Verdict</th></tr></thead>
     <tbody>
@@ -134,6 +139,7 @@ footer{
       </tr>
     </tbody>
   </table>
+  </div>
   <p class="note">Strongest single diagnostic: <code>uncertainty_rho</code> ρ = 0.70, Holm-adjusted p = 0.393
   (not significant). All Holm-adjusted p-values are non-significant at n=9; these are directional signals,
   not confirmed effects.</p>
@@ -156,6 +162,7 @@ footer{
 
   <div class="links">
     <a href="https://github.com/dafahaha/wm-audit" target="_blank" rel="noopener">Repository</a>
+    <a href="https://github.com/dafahaha/wm-audit/blob/main/configs/preregistration.yaml" target="_blank" rel="noopener">Locked pre-registration (YAML)</a>
     <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/LEADERBOARD.md" target="_blank" rel="noopener">Pilot leaderboard</a>
     <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/results_main.json" target="_blank" rel="noopener">Committed results (JSON)</a>
   </div>

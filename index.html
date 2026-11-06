@@ -9,6 +9,11 @@
 <meta property="og:title" content="Daizhi Liao — RL &amp; Embodied AI">
 <meta property="og:description" content="Undergraduate researcher on reinforcement learning, embodied AI, and empirical auditing of deployed AI systems.">
 <meta property="og:url" content="https://dafahaha.github.io/">
+<meta name="author" content="Daizhi Liao">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daizhi Liao — RL &amp; Embodied AI">
+<meta name="twitter:description" content="Undergraduate researcher on reinforcement learning, embodied AI, and empirical auditing of deployed AI systems.">
+<link rel="canonical" href="https://dafahaha.github.io/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230071e3'/><text x='50' y='68' font-size='52' font-family='-apple-system,sans-serif' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>">
 <style>
 :root{
@@ -69,7 +74,8 @@ strong{font-weight:650;}
 table{border-collapse:collapse; width:100%; max-width:760px; margin:10px 0; font-size:15px;}
 th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
 th{font-weight:600; color:var(--sub); font-size:13px; letter-spacing:0.02em;}
-.pill{display:inline-block; font-size:12px; color:#1d7d34; background:rgba(52,199,89,.12); border-radius:999px; padding:1px 9px; font-weight:600;}
+th:nth-child(2),td:nth-child(2){white-space:nowrap;}
+.pill{display:inline-block; white-space:nowrap; font-size:12px; color:#1d7d34; background:rgba(52,199,89,.12); border-radius:999px; padding:1px 9px; font-weight:600;}
 code{font-family:"SF Mono",Menlo,Consolas,monospace; font-size:.86em; background:var(--code-bg); padding:1px 5px; border-radius:5px;}
 footer{
   margin-top:72px; padding-top:24px; border-top:1px solid var(--line);
@@ -80,8 +86,13 @@ footer{
   .wrap{padding:40px 18px 72px;}
   h1{font-size:33px;} .subtitle{font-size:17px;}
   .nav .links{gap:14px;}
-  .table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch;}
-  td,th{word-break:break-word;}
+  .table-wrap{overflow:visible;}
+  table{max-width:none; margin:4px 0 10px; font-size:14.5px;}
+  thead{display:none;}
+  tbody tr{display:block; padding:10px 0 12px; border-bottom:1px solid var(--line);}
+  td{display:block; border:0; padding:1px 0; overflow-wrap:anywhere; word-break:normal;}
+  td:first-child{font-weight:600; padding-bottom:3px;}
+  td:nth-child(2){font-size:13px; color:var(--sub);}
   td code{word-break:break-word;}
 }
 </style>
@@ -107,8 +118,8 @@ footer{
   <header class="hero">
     <h1>Daizhi Liao</h1>
     <p class="subtitle">Fourth-year undergraduate (senior), Guangzhou University &middot; Network Engineering</p>
-    <p class="subtitle">Applying to PhD programs in Fall 2027 &middot; Embodied AI / Reinforcement Learning / Robotics</p>
-    <p class="tagline">I lead a small set of my own tools and studies — things that test what a
+    <p class="subtitle">Applying for Fall 2027 PhD entry (applications due Dec 2026&ndash;Jan 2027) &middot; Embodied AI / Reinforcement Learning / Robotics</p>
+    <p class="tagline">I build a small set of self-directed tools and studies — things that test what a
     deployed model actually does, not what it claims to do. My open-source work began with a broad
     exploratory phase of small PRs across many RL/ML repos; I've since narrowed to a few in-depth
     upstream fixes, which is what the section below leads with.</p>
@@ -117,15 +128,16 @@ footer{
   <section id="research">
     <h2>Research Interests</h2>
     <ul>
-      <li><strong>Reinforcement learning for embodied agents</strong> — off-policy algorithms, sample efficiency, stability.</li>
-      <li><strong>Behavioral fingerprinting &amp; empirical auditing of LLMs</strong> — statistical tests that distinguish models by how they behave under probing, not by self-reported labels.</li>
-      <li><strong>Cross-platform RL deployment</strong> — policy export (ONNX/TorchScript), TensorRT/INT8/FP16 quantization, latency–accuracy tradeoffs on GPU and edge.</li>
-      <li><strong>AI safety &amp; adversarial robustness</strong> — where deployed systems silently deviate from specification.</li>
+      <li><strong>Reinforcement learning for embodied agents</strong> — off-policy algorithms, sample efficiency, and what actually predicts closed-loop performance.</li>
+      <li><strong>Preregistered evaluation of RL</strong> — small controlled studies with hypotheses locked before the runs, null results reported as null, and artefacts that reproduce from committed logs.</li>
+      <li><strong>Behavioural fingerprinting &amp; empirical auditing</strong> — statistical tests that separate models by behaviour under probing rather than by self-reported labels, applied to LLM API relays and to deployed systems that silently drift from specification.</li>
+      <li><strong>RL deployment engineering</strong> (an engineering interest, not a research claim) — ONNX/TorchScript export, FP16/INT8 quantisation, latency&ndash;accuracy tradeoffs.</li>
     </ul>
   </section>
 
   <section id="projects">
     <h2>Selected Projects</h2>
+    <p style="font-size:15px;color:var(--sub);margin:0 0 2px;">Two preregistered research pilots whose null results are reported as null, one shipped auditing tool, and one engineering toolkit. Every number below traces to a committed artefact in the linked repository.</p>
 
     <div class="project">
       <h3>TransitTruth</h3>
@@ -355,7 +367,7 @@ footer{
 
   <footer>
     <span><a href="mailto:ldz@e.gzhu.edu.cn">ldz@e.gzhu.edu.cn</a> &middot; Guangzhou, China</span>
-    <span><a href="https://github.com/dafahaha" target="_blank" rel="noopener">GitHub</a> &middot; Last updated November 2026</span>
+    <span><a href="https://github.com/dafahaha" target="_blank" rel="noopener">GitHub</a> &middot; Last updated 7 November 2026</span>
   </footer>
 
 </div>
