@@ -277,7 +277,7 @@ footer{
     </ul>
 
     <p style="margin-top:24px;">Selected code PRs currently <strong>under review (not yet merged)</strong> in upstream RL/ML infrastructure.
-    All ten are single-file bug fixes; they are listed for transparency and are not counted as merged work.</p>
+    They are small, self-contained fixes &mdash; typically one source file plus its test &mdash; listed for transparency; none of the ten is counted as merged work.</p>
     <div class="table-wrap">
     <table>
       <thead><tr><th>Project</th><th>PR</th><th>What I fixed</th></tr></thead>
@@ -344,9 +344,7 @@ footer{
     <p style="font-size:15px;color:var(--sub);margin:22px 0 4px;"><strong style="color:var(--ink);font-weight:600;">Agent skills &amp; tools</strong></p>
     <p style="font-size:14px;color:var(--sub);margin:0 0 8px;">Small, focused, offline tools I built to keep RL
       reporting and API-relay setup honest. They are zero-dependency local utilities (not services); each
-      ships with its own test suite. Upstream, my contribution history began with a broad exploratory
-      phase of small PRs across many RL/ML repositories; what survived review is what the merged
-      section above lists.</p>
+      ships with its own test suite.</p>
     <ul style="font-size:14.5px;color:#3a3a3c;">
       <li><a href="https://github.com/dafahaha/seedlot" target="_blank" rel="noopener">seedlot</a> &mdash; aggregate per-seed RL logs into mean&nbsp;&plusmn;&nbsp;std, IQR and 95% CI; blocks single-seed superiority claims.</li>
       <li><a href="https://github.com/dafahaha/policy-parity" target="_blank" rel="noopener">policy-parity</a> &mdash; compare FP32 vs quantized/exported action logs (MAE, cosine, tolerance) before deployment.</li>
