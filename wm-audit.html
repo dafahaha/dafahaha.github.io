@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>wm-audit — Daizhi Liao</title>
-<meta name="description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Reduced pilot, honest limits.">
+<meta name="description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Locked-scale single-env run, honest limits.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="wm-audit — Daizhi Liao">
-<meta property="og:description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Reduced pilot, honest limits.">
+<meta property="og:description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Locked-scale single-env run, honest limits.">
 <meta property="og:url" content="https://dafahaha.github.io/wm-audit.html">
 <meta name="author" content="Daizhi Liao">
 <meta name="twitter:card" content="summary">
@@ -103,7 +103,7 @@ footer{
     <p class="subtitle">A preregistered CPU audit suite that asks which world-model diagnostics actually predict closed-loop control.</p>
     <div class="row">
       <span class="chip">Preregistered</span>
-      <span class="chip">Reduced pilot (n=9)</span>
+      <span class="chip">Locked-scale run (n=15)</span>
       <span class="chip">66 tests</span>
       <span class="chip">Single-machine CPU</span>
     </div>
@@ -117,60 +117,62 @@ footer{
   <p>Perceptual fidelity numbers can look good while a planner still fails to solve the task. Without a
   preregistered split between "looks right" and "controls well", a model can be selected on the wrong axis.</p>
 
-  <h2>Pilot findings (pixel_nav, 3 seeds &times; 3 capacities, 12k steps)</h2>
+  <h2>Locked-scale results (pixel_nav, 5 seeds &times; 3 capacities, 200k train steps, n=15)</h2>
   <div class="table-wrap">
   <table>
     <thead><tr><th>Hypothesis</th><th>Observed</th><th>Verdict</th></tr></thead>
     <tbody>
       <tr>
         <td>H1: pixel composite weakly tracks return (|ρ| &lt; 0.4)</td>
-        <td>ρ = −0.317, |ρ| = 0.32</td>
-        <td>Threshold met &mdash; weak/tentative; not significant (n=9, CI crosses zero, Holm p=1.0)</td>
+        <td>ρ = 0.021, |ρ| = 0.02</td>
+        <td>Threshold met &mdash; weak/tentative; not significant (95% CI [&minus;0.540, 0.622], Holm p=1.000)</td>
       </tr>
       <tr>
         <td>H2: control composite predicts return (ρ &gt; 0.6)</td>
-        <td>ρ = 0.259</td>
-        <td>Not supported</td>
+        <td>ρ = &minus;0.102</td>
+        <td><strong>Contradicted</strong> &mdash; far below threshold, opposite sign</td>
       </tr>
       <tr>
-        <td>H3: INT8 degrades calibration faster than pixel fidelity (n_pairs=9)</td>
-        <td>pixel 0.433 &gt; control 0.352</td>
-        <td>Not supported</td>
+        <td>H3: INT8 degrades calibration faster than pixel fidelity (n_pairs=15)</td>
+        <td>pixel 0.780 vs control 0.422</td>
+        <td><strong>Reversed</strong> &mdash; pixel composite degrades more</td>
       </tr>
     </tbody>
   </table>
   </div>
-  <p class="note">Strongest single diagnostic: <code>uncertainty_rho</code> ρ = 0.70, Holm-adjusted p = 0.393
-  (not significant). All Holm-adjusted p-values are non-significant at n=9; these are directional signals,
-  not confirmed effects.</p>
+  <p class="note">Strongest single diagnostic: <code>counterfactual_tau</code> ρ = 0.250 &mdash; still
+  non-significant after Holm correction. Every adjusted p is non-significant at n=15; these are directional
+  signals, not confirmed effects. The reduced pilot (2026-10-13, n=9) is kept as historical context
+  (H1 0.317, H2 0.259, H3 0.433 vs 0.352).</p>
 
   <h2>Honest limits</h2>
   <div class="card">
     <ul>
-      <li><strong>Reduced pilot, not the main run.</strong> One built-in env (pixel_nav), 3 seeds &times; 3
-      capacities, 12k train steps; the locked 200k-step &times; 5-seed &times; 2-env main experiment has not
-      been run.</li>
+      <li><strong>Single-env subset, not the full 2-env main.</strong> The locked-scale run (200k train
+      steps &times; 5 seeds &times; 3 capacities) ran on the one installable env, pixel_nav;
+      <code>dm_control.cartpole_swingup</code> could not be installed in either the Windows machine or the
+      Linux CPU container.</li>
       <li><strong>Stand-in perceptual metrics.</strong> <code>pixel_lpips</code> and <code>rollout_fvd</code>
       are deterministic seeded random-conv filter banks standing in for learned VGG/AlexNet backbones; real
       numbers, reproducible, but not publication-grade LPIPS/FVD.</li>
-      <li><strong>Underpowered.</strong> n=9 float rows; bootstrap CIs are wide and every adjusted p is
-      non-significant. Treat findings as hypotheses for the main run, not conclusions.</li>
+      <li><strong>Still underpowered.</strong> n=15 float rows; bootstrap CIs remain wide and every adjusted
+      p is non-significant. Treat findings as directional signals, not conclusions.</li>
       <li><strong>Not a recurrent world model.</strong> Training resets the GRU state to zeros every
-      batch and never unrolls sequences, so no temporal dependency is learned — the pilot is a
+      batch and never unrolls sequences, so no temporal dependency is learned — the model is a
       per-transition stand-in, not evidence about genuinely recurrent dynamics.</li>
-      <li><strong>Rank-collinearity (n=9).</strong> Five of the eleven diagnostics share one identical
-      rank pattern (ρ=0.317, p=0.4064, CI [−0.554, 0.947]), so multi-diagnostic agreement is not
-      five independent confirmations.</li>
-      <li><strong>Windows constraint.</strong> dm_control cartpole is unavailable on Windows; the pilot uses
-      the built-in pixel_nav env only.</li>
+      <li><strong>Rank-collinearity.</strong> At n=9 five of the eleven diagnostics shared one identical
+      rank pattern; at n=15 the group shrank to two (<code>pixel_mse</code>, <code>pixel_nll</code>,
+      ρ=0.061, p=0.830). Multi-diagnostic agreement is still not independent confirmation.</li>
+      <li><strong>Env constraint.</strong> dm_control cartpole is unavailable on Windows and in the CPU
+      container; both runs use the built-in pixel_nav env only.</li>
     </ul>
   </div>
 
   <div class="links">
     <a href="https://github.com/dafahaha/wm-audit" target="_blank" rel="noopener">Repository</a>
     <a href="https://github.com/dafahaha/wm-audit/blob/main/configs/preregistration.yaml" target="_blank" rel="noopener">Locked pre-registration (YAML)</a>
-    <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/LEADERBOARD.md" target="_blank" rel="noopener">Pilot leaderboard</a>
-    <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/results_main.json" target="_blank" rel="noopener">Committed results (JSON)</a>
+    <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/LEADERBOARD.md" target="_blank" rel="noopener">Leaderboard</a>
+    <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/results_main_pixelnav_200k.json" target="_blank" rel="noopener">Main results (JSON)</a>
   </div>
 
   <footer>

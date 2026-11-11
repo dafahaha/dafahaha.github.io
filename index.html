@@ -136,7 +136,7 @@ footer{
 
   <section id="projects">
     <h2>Selected Projects</h2>
-    <p style="font-size:15px;color:var(--sub);margin:0 0 2px;">Two preregistered research pilots, one shipped auditing tool, and one engineering toolkit.</p>
+    <p style="font-size:15px;color:var(--sub);margin:0 0 2px;">Two preregistered research studies, one shipped auditing tool, and one engineering toolkit.</p>
 
     <div class="project">
       <h3>wm-audit</h3>
@@ -145,13 +145,15 @@ footer{
       <strong>perceptual fidelity</strong> (next-frame MSE / SSIM / NLL, plus fixed-filter stand-ins for
       LPIPS / rollout FVD — deterministic random-conv filter banks, <em>not</em> learned VGG/AlexNet
       backbones) from its <strong>control utility</strong> (whether a planner can actually solve the
-      task using it). A reduced pilot on one env (pixel_nav, 3 seeds &times; 3 capacities, 12k steps)
-      found: H1 threshold met &mdash; pixel fidelity weakly tracks closed-loop return at
-      &rho;=&minus;0.32 (|&rho;|=0.32&lt;0.4), but this is a weak, tentative exploratory signal only (n=9 pilot; the 95% CI
-      crosses zero and Holm-adj p=1.0, so it is <em>not statistically significant</em> and not an
-      established finding); control-relevant diagnostics did not (H2 not supported, &rho;=0.26&lt;0.6);
-      INT8 compression did not degrade calibration faster than raw pixel fidelity (H3 not supported,
-      n_pairs=9). This is a CPU reduced pilot, not the locked 200k-step &times; 5-seed &times; 2-env main run.</p>
+      task using it). Locked-scale run on one env (pixel_nav, 5 seeds &times; 3 capacities, 200k train
+      steps, n=15 float rows): H1 threshold met &mdash; but pixel fidelity barely tracks closed-loop
+      return (&rho;=0.02, 95% CI crosses zero, Holm-adj p=1.0), a weak, non-significant signal, not an
+      established finding; <strong>H2 was contradicted</strong> (control-relevant diagnostics
+      &rho;=&minus;0.10, far below the pre-registered 0.6); <strong>H3 reversed</strong> &mdash; INT8
+      compression degraded the pixel composite (0.78) more than the control/calibration composite
+      (0.42), the opposite of the pre-registered direction. Diagnostic collinearity also fell: five
+      identical rank patterns at n=9 dropped to two at n=15. This is a single-env subset of the
+      pre-registered 2-env design; the second env could not be installed in the CPU container.</p>
       <div class="row">
         <span class="chip">PyTorch</span><span class="chip">World Models</span>
         <span class="chip">Preregistration</span><span class="chip">CPU</span>
@@ -159,7 +161,7 @@ footer{
       <div class="links">
         <a href="wm-audit.html">Project details</a>
         <a href="https://github.com/dafahaha/wm-audit" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/LEADERBOARD.md" target="_blank" rel="noopener">Pilot Results</a>
+        <a href="https://github.com/dafahaha/wm-audit/blob/main/leaderboard/LEADERBOARD.md" target="_blank" rel="noopener">Results</a>
       </div>
     </div>
 

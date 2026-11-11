@@ -72,12 +72,13 @@
     </div>
     <p>Single-machine CPU audit suite (reproducible, seeded) that separates world-model <em>perceptual fidelity</em> (next-frame
     MSE / SSIM / NLL; fixed random-conv filter banks as stand-ins for learned metrics) from <em>control utility</em> (whether a
-    planner can solve the task). Reduced pilot on one env (pixel_nav, 3 seeds &times; 3 capacities, 12k steps): H1 threshold
-    met &mdash; pixel fidelity weakly tracked closed-loop return at |&rho;|=0.32&lt;0.4, but this is a weak, tentative
-    exploratory signal only (n=9; 95% CI crosses zero, Holm-adj p=1.0 &rarr; not statistically significant, not an
-    established finding); control-relevant diagnostics did not (H2 not supported,
-    &rho;=0.26&lt;0.6); INT8 compression did not degrade calibration faster than raw fidelity (H3 not supported). The locked
-    200k-step &times; 5-seed &times; 2-env main run has not been run; this is the preregistered reduced pilot only.
+    planner can solve the task). Locked-scale run on one env (pixel_nav, 5 seeds &times; 3 capacities, 200k train steps,
+    n=15): H1 threshold met &mdash; pixel fidelity barely tracked closed-loop return at &rho;=0.02 (95% CI crosses zero,
+    Holm-adj p=1.0 &rarr; not statistically significant, not an established finding); H2 was contradicted (control-relevant
+    diagnostics &rho;=&minus;0.10&lt;0.6); H3 reversed &mdash; INT8 compression degraded the pixel composite (0.78) more than the
+    control composite (0.42). Diagnostic collinearity fell from five identical rank patterns at n=9 to two at n=15. This is
+    a single-env subset of the pre-registered 2-env design; the second env (dm_control cartpole) could not be installed in
+    the CPU container.
     <br><span class="muted">Code: <a href="https://github.com/dafahaha/wm-audit">github.com/dafahaha/wm-audit</a></span></p>
   </div>
 
