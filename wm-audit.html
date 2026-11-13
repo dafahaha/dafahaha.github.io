@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>wm-audit — Daizhi Liao</title>
-<meta name="description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Locked-scale single-env run, honest limits.">
+<meta name="description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Both preregistered environments executed at locked scale; honest limits.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="wm-audit — Daizhi Liao">
-<meta property="og:description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Locked-scale single-env run, honest limits.">
+<meta property="og:description" content="wm-audit: a preregistered CPU audit suite that checks whether world-model perceptual diagnostics actually predict closed-loop control utility. Both preregistered environments executed at locked scale; honest limits.">
 <meta property="og:url" content="https://dafahaha.github.io/wm-audit.html">
 <meta name="author" content="Daizhi Liao">
 <meta name="twitter:card" content="summary">
@@ -148,10 +148,19 @@ footer{
   <h2>Honest limits</h2>
   <div class="card">
     <ul>
-      <li><strong>Single-env subset, not the full 2-env main.</strong> The locked-scale run (200k train
-      steps &times; 5 seeds &times; 3 capacities) ran on the one installable env, pixel_nav;
-      <code>dm_control.cartpole_swingup</code> could not be installed in either the Windows machine or the
-      Linux CPU container.</li>
+      <li><strong>Both preregistered environments are now executed (2/2).</strong> The 200k-step × 5-seed ×
+      3-capacity grid ran on <code>pixel_nav</code> in a CPU container and then on
+      <code>dm_control.cartpole_swingup</code> as five seed shards on GitHub-hosted runners
+      (dm_control 1.0.52 / mujoco 4.0.1, <code>MUJOCO_GL=osmesa</code>). The second env repeats the
+      pattern instead of rescuing it: H1 rule met at ρ = +0.130 (CI &minus;0.477…+0.685, still
+      uninformative), H2 at +0.301 against the 0.6 bar, and the same reversed H3 ordering
+      (pixel 1.580 vs control 1.367).</li>
+      <li><strong>Two diagnostics are undefined in cartpole and are reported as <code>null</code>.</strong>
+      <code>counterfactual_tau</code> is NaN in all 30 rows (a 10 ms step barely moves the pole, so the
+      oracle reward is effectively constant), and <code>uncertainty_rho</code> in 6/30 (the ensemble
+      collapses at the smallest capacity). H2's control composite is therefore a 1–2-of-3 mean, and
+      <code>R_real</code> takes only 9 distinct values across 15 float rows — stated in the JSON
+      (<code>composite_coverage</code>, <code>outcome_resolution</code>), not only in prose.</li>
       <li><strong>Stand-in perceptual metrics.</strong> <code>pixel_lpips</code> and <code>rollout_fvd</code>
       are deterministic seeded random-conv filter banks standing in for learned VGG/AlexNet backbones; real
       numbers, reproducible, but not publication-grade LPIPS/FVD.</li>
@@ -163,8 +172,9 @@ footer{
       <li><strong>Rank-collinearity.</strong> At n=9 five of the eleven diagnostics shared one identical
       rank pattern; at n=15 the group shrank to two (<code>pixel_mse</code>, <code>pixel_nll</code>,
       ρ=0.061, p=0.830). Multi-diagnostic agreement is still not independent confirmation.</li>
-      <li><strong>Env constraint.</strong> dm_control cartpole is unavailable on Windows and in the CPU
-      container; both runs use the built-in pixel_nav env only.</li>
+      <li><strong>Env constraint, resolved.</strong> dm_control does not install on Windows (<code>labmaze</code>
+      needs <code>bazel</code>) and the original CPU container was recycled every few minutes, so the second
+      environment was run on GitHub-hosted Linux runners instead of locally.</li>
     </ul>
   </div>
 

@@ -76,9 +76,11 @@
     n=15): H1 threshold met &mdash; pixel fidelity barely tracked closed-loop return at &rho;=0.02 (95% CI crosses zero,
     Holm-adj p=1.0 &rarr; not statistically significant, not an established finding); H2 was contradicted (control-relevant
     diagnostics &rho;=&minus;0.10&lt;0.6); H3 reversed &mdash; INT8 compression degraded the pixel composite (0.78) more than the
-    control composite (0.42). Diagnostic collinearity fell from five identical rank patterns at n=9 to two at n=15. This is
-    a single-env subset of the pre-registered 2-env design; the second env (dm_control cartpole) could not be installed in
-    the CPU container.
+    control composite (0.42). Diagnostic collinearity fell from five identical rank patterns at n=9 to two at n=15. Both
+    pre-registered environments are now executed at locked scale (2/2): the second one,
+    <code>dm_control.cartpole_swingup</code>, ran on GitHub-hosted runners and repeated the pattern &mdash; H1 &rho;=+0.13
+    (wide interval), H2 +0.30 against the 0.6 bar, H3 reversed again at 1.58 vs 1.37 &mdash; while two of nine diagnostics
+    proved unmeasurable there and are reported as null rather than as numbers.
     <br><span class="muted">Code: <a href="https://github.com/dafahaha/wm-audit">github.com/dafahaha/wm-audit</a></span></p>
   </div>
 

@@ -152,8 +152,11 @@ footer{
       &rho;=&minus;0.10, far below the pre-registered 0.6); <strong>H3 reversed</strong> &mdash; INT8
       compression degraded the pixel composite (0.78) more than the control/calibration composite
       (0.42), the opposite of the pre-registered direction. Diagnostic collinearity also fell: five
-      identical rank patterns at n=9 dropped to two at n=15. This is a single-env subset of the
-      pre-registered 2-env design; the second env could not be installed in the CPU container.</p>
+      identical rank patterns at n=9 dropped to two at n=15. The second pre-registered environment
+      (<code>dm_control.cartpole_swingup</code>) has since been executed at the same locked scale on
+      GitHub-hosted runners and repeats the pattern rather than rescuing it (H1 &rho;=+0.13 with a
+      wide interval, H2 +0.30 against the 0.6 bar, H3 reversed again at 1.58 vs 1.37), so the study is
+      now a <strong>2-of-2</strong> pre-registered main.</p>
       <div class="row">
         <span class="chip">PyTorch</span><span class="chip">World Models</span>
         <span class="chip">Preregistration</span><span class="chip">CPU</span>
